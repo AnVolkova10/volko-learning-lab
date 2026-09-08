@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8f7f4" />
+    <meta
+      name="description"
+      content="Volko Learning Lab. Small notes, clear examples, and a little curiosity every day. Start with the five principles of SOLID."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Volko Learning Lab</title>
+    <script>
+      // Choose a theme before React and the stylesheet load to avoid a flash.
+      (() => {
+        let theme;
+        try {
+          theme = localStorage.getItem("volko-theme");
+        } catch {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]').content =
+          theme === "dark" ? "#19161f" : "#f8f7f4";
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
