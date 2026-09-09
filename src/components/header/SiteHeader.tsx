@@ -18,6 +18,7 @@ export function SiteHeader({ isLibrary }: { isLibrary: boolean }) {
           className="brand"
           href="#/"
           aria-label="Volko's learning library home"
+          aria-current={isLibrary ? "page" : undefined}
         >
           <span className="brand-icon" aria-hidden="true">
             v<span>✳</span>
@@ -29,13 +30,6 @@ export function SiteHeader({ isLibrary }: { isLibrary: boolean }) {
         </a>
         <div className="header-actions">
           <ThemeToggle />
-          <a
-            className="nav-link"
-            href="#/"
-            aria-current={isLibrary ? "page" : undefined}
-          >
-            My library <span aria-hidden="true">↗</span>
-          </a>
         </div>
       </div>
     </header>

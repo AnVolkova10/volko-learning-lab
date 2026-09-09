@@ -55,20 +55,6 @@
   margin-top: 4px;
 }
 
-.nav-link {
-  font-size: 12px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 29px;
-  padding: 12px 0;
-}
-
-.nav-link > span {
-  font-size: 19px;
-  color: var(--violet);
-}
-
 [data-theme="dark"] .brand-icon {
   background: var(--accent-surface);
   color: var(--violet);
@@ -97,11 +83,6 @@
     height: 37px;
     font-size: 31px;
   }
-
-  .nav-link {
-    font-size: 11px;
-    gap: 13px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -120,17 +101,6 @@
 
   .brand-subtitle {
     font-size: 6px;
-  }
-
-  .nav-link {
-    font-size: 10px;
-    gap: 8px;
-  }
-}
-
-@media (max-width: 360px) {
-  .header-actions .nav-link > span {
-    display: none;
   }
 }
 

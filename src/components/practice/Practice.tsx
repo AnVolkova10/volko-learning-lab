@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ExerciseBank } from "../../data/types";
 import { selectExercises } from "../../lib/selectExercises";
 import { Exercise } from "./Exercise";
@@ -8,8 +8,35 @@ export function Practice({ bank }: { bank: ExerciseBank }) {
   const [index, setIndex] = useState(0);
   const [finished, setFinished] = useState(false);
   const page = useRef<HTMLDivElement>(null);
+  const turn = useRef<Animation | null>(null);
+  const [turning, setTurning] = useState(false);
 
-  function advance() {
+  useEffect(() => () => turn.current?.cancel(), []);
+
+  async function advance() {
+    const sheet = page.current;
+    if (!sheet || turn.current) return;
+    sheet.focus({ preventScroll: true });
+    sheet.scrollIntoView({ block: "start", behavior: "instant" });
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTurning(true);
+      // Turn the old sheet away before mounting the next question.
+      turn.current = sheet.animate(
+        [
+          { transform: "perspective(1200px) rotateY(0deg)", opacity: 1 },
+          {
+            transform:
+              "perspective(1200px) translateX(-12%) rotateY(-65deg) scale(.94)",
+            opacity: 0,
+          },
+        ],
+        { duration: 320, easing: "cubic-bezier(.55, .05, .8, .45)" },
+      );
+      await turn.current.finished.catch(() => {});
+      turn.current = null;
+      if (!sheet.isConnected) return;
+      setTurning(false);
+    }
     if (index === exercises.length - 1) setFinished(true);
     else setIndex((current) => current + 1);
     // Keep the new sheet in view, including when the previous answer was long.
@@ -42,6 +69,7 @@ export function Practice({ bank }: { bank: ExerciseBank }) {
         ref={page}
         tabIndex={-1}
         aria-label="Current practice question"
+        inert={turning}
       >
         {finished ? (
           <div className="practice-complete">

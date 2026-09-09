@@ -28,13 +28,35 @@
   stroke-linejoin: round;
 }
 
-@media (max-width: 480px) {
+/* Match the V tile visually, keeping a 44px touch area around it. */
+@media (max-width: 760px) {
   .theme-toggle {
+    position: relative;
+    width: 37px;
+    min-height: 37px;
+    height: 37px;
+    padding: 0;
+    border-radius: 12px;
+    transition:
+      width 280ms ease,
+      height 280ms ease,
+      min-height 280ms ease;
+  }
+  .theme-toggle::after {
+    content: "";
+    position: absolute;
     width: 44px;
-    min-height: 44px;
-    padding: 8px;
+    height: 44px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   .theme-toggle-label {
     display: none;
+  }
+  .is-compact .theme-toggle {
+    width: 32px;
+    height: 32px;
+    min-height: 32px;
   }
 }
