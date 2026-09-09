@@ -15,7 +15,7 @@ const englishTopic: Topic = {
   introduction: "A language note.",
   sections: [],
   recap: [],
-  exercises: topics[0].exercises,
+  exerciseBank: topics[0].exerciseBank,
 };
 const collection = [...topics, englishTopic];
 

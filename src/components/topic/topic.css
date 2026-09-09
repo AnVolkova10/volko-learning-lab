@@ -222,3 +222,15 @@
     font-size: 28px;
   }
 }
+
+@media (max-width: 760px) {
+  .lesson-layout { grid-template-columns: minmax(0, 1fr); }
+  .topic-description, .lesson-content p { font-size: 16px; line-height: 1.65; }
+  .topic-meta { flex-wrap: wrap; font-size: 12px; }
+  .principle-heading h2 { min-width: 0; overflow-wrap: anywhere; }
+  .principle-letter { flex-shrink: 0; }
+}
+
+@media (max-width: 760px) {
+  .lesson-content p.eyebrow { font-size: 11px; }
+}

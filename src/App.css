@@ -205,3 +205,7 @@
     display: none;
   }
 }
+
+@media (max-width: 760px) {
+  .site-footer { font-size: 12px; }
+}

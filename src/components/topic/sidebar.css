@@ -102,3 +102,7 @@
     display: none;
   }
 }
+
+@media (max-width: 760px) {
+  .lesson-sidebar nav > a { font-size: 14px; min-height: 44px; }
+}

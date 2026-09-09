@@ -30,8 +30,8 @@
 
 @media (max-width: 480px) {
   .theme-toggle {
-    width: 38px;
-    min-height: 38px;
+    width: 44px;
+    min-height: 44px;
     padding: 8px;
   }
   .theme-toggle-label {

@@ -5,9 +5,11 @@ import { CodeExample } from "../lesson/LessonBlocks";
 export function Exercise({
   exercise,
   questionNumber,
+  questionCount,
 }: {
   exercise: ExerciseData;
   questionNumber: number;
+  questionCount: number;
 }) {
   const firstAnswer = useRef<HTMLInputElement>(null);
   const [selected, setSelected] = useState("");
@@ -17,7 +19,7 @@ export function Exercise({
 
   return (
     <div className="exercise-card">
-      <p className="eyebrow">QUESTION {questionNumber} OF 5</p>
+      <p className="eyebrow">QUESTION {questionNumber} OF {questionCount}</p>
       <h3 className="exercise-title">{exercise.title}</h3>
       <p>{exercise.prompt}</p>
       {exercise.code && (
@@ -51,7 +53,7 @@ export function Exercise({
                     setSubmitted(false);
                   }}
                 />
-                {option.label}
+                <span>{option.label}</span>
               </label>
             ))}
           </div>

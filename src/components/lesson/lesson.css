@@ -257,3 +257,14 @@ code {
 :root[data-theme="dark"] .simple-definition p {
   color: var(--text);
 }
+
+pre { min-width: 0; max-width: 100%; }
+.code-example { min-width: 0; }
+
+@media (max-width: 760px) {
+  pre { font-size: 14px; line-height: 1.65; padding: 16px; }
+  .simple-definition { padding: 18px 16px; }
+  .simple-definition h3, .takeaway strong, .analogy strong { font-size: 14px; }
+  .recap { padding: 24px 18px; }
+  .recap li { font-size: 16px; line-height: 1.65; }
+}

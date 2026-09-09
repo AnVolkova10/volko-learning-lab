@@ -246,7 +246,7 @@ export function Library({
                 <Tags tags={topic.tags} />
                 <div className="card-bottom">
                   <span>{topic.readMinutes} min read</span>
-                  {topic.exercises && (
+                  {topic.exerciseBank && (
                     <span>
                       <span className="tiny-star" aria-hidden="true">
                         ✳

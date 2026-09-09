@@ -19,7 +19,7 @@ export function TableOfContents({ topicId, sections }: TableOfContentsProps) {
         ))}
 
         <a href={`#/topics/${topicId}/practice`}>
-          ✳ &nbsp; Five practice questions
+          ✳ &nbsp; Ten practice questions
         </a>
 
         <a href={`#/topics/${topicId}/recap`}>Your pocket recap</a>

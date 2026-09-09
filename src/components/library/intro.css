@@ -196,3 +196,8 @@
     letter-spacing: 1.4px;
   }
 }
+
+@media (max-width: 760px) {
+  .intro-copy { font-size: 16px; line-height: 1.65; }
+  .intro .eyebrow { font-size: 11px; }
+}

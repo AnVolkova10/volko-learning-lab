@@ -298,3 +298,16 @@
     right: 40px;
   }
 }
+
+@media (max-width: 760px) {
+  .featured-content > p:not(.eyebrow) { font-size: 16px; line-height: 1.65; }
+  .featured { grid-template-columns: minmax(0, 1fr); }
+  .featured-content { min-width: 0; }
+  .featured-bottom { flex-wrap: wrap; }
+  .featured h2 { overflow-wrap: anywhere; }
+}
+
+@media (max-width: 480px) {
+  .solid-art { padding-inline: 16px; }
+  .solid-blocks > span { min-width: 0; flex: 1; max-width: 45px; }
+}

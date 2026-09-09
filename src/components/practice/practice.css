@@ -128,3 +128,17 @@ legend {
   line-height: 1.25;
   margin-bottom: 18px;
 }
+
+/* A code line must never set the width of the question grid. */
+.practice-questions, .exercise-options { grid-template-columns: minmax(0, 1fr); }
+.exercise-card, .exercise-option, .exercise-option span { min-width: 0; }
+.exercise-option span { overflow-wrap: anywhere; }
+
+@media (max-width: 760px) {
+  .exercise-card { padding: 24px 16px; }
+  .exercise-option { min-height: 48px; padding: 12px; font-size: 16px; line-height: 1.65; align-items: flex-start; }
+  .exercise-option input { width: 20px; height: 20px; margin-top: 3px; }
+  .exercise-card legend, .exercise-feedback strong { font-size: 16px; }
+  .exercise-title { font-size: 26px; overflow-wrap: anywhere; }
+  .exercise-card .button { width: 100%; min-height: 48px; font-size: 16px; }
+}

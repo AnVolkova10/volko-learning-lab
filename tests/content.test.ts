@@ -30,14 +30,20 @@ test("topic and section IDs form unique, valid navigation targets", () => {
   }
 });
 
-test("every topic has five independently identified questions with valid answers", () => {
+test("every topic has thirty independently identified questions with valid answers", () => {
   for (const topic of topics) {
-    assert.equal(topic.exercises.length, 5);
+    const exercises = topic.exerciseBank.flatMap(concept => [...concept.apply, ...concept.identify]);
+    assert.equal(topic.exerciseBank.length, 5);
+    for (const concept of topic.exerciseBank) {
+      assert.equal(concept.apply.length, 3);
+      assert.equal(concept.identify.length, 3);
+    }
+    assert.equal(exercises.length, 30);
     assert.equal(
-      new Set(topic.exercises.map((exercise) => exercise.id)).size,
-      5,
+      new Set(exercises.map((exercise) => exercise.id)).size,
+      30,
     );
-    for (const exercise of topic.exercises) {
+    for (const exercise of exercises) {
       assert.ok(exercise.title.trim());
       assert.ok(exercise.prompt.trim());
       assert.ok(exercise.options.length >= 2);
@@ -60,11 +66,11 @@ test("every topic has five independently identified questions with valid answers
   }
 });
 
-test("SOLID includes one question and a complete explanation for every principle", () => {
+test("SOLID includes six questions and a complete explanation for every principle", () => {
   const solid = topics.find((topic) => topic.id === "solid")!;
   assert.deepEqual(
-    solid.exercises.map((exercise) => exercise.id),
-    ["srp", "ocp", "lsp", "isp", "dip"],
+    solid.exerciseBank.map((concept) => concept.id),
+    ["s", "o", "l", "i", "d"],
   );
   assert.equal(solid.sections.length, 5);
   for (const section of solid.sections) {

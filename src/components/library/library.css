@@ -308,3 +308,9 @@
     font-size: 20px;
   }
 }
+
+@media (max-width: 760px) {
+  .search-field input { font-size: 16px; min-width: 0; }
+  .filter-chip { font-size: 14px; min-height: 44px; }
+  .closing-note > p { font-size: 16px; }
+}

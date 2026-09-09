@@ -96,7 +96,7 @@ export function TopicDetail({ topic }: { topic: Topic }) {
               {section.takeaway && <Takeaway text={section.takeaway} />}
             </section>
           ))}
-          <Practice exercises={topic.exercises} />
+          <Practice key={topic.id} bank={topic.exerciseBank} />
           <Recap items={topic.recap} />
           {topic.sources && (
             <details className="sources">

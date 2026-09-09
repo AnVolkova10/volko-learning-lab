@@ -37,9 +37,15 @@ export type Topic = {
   introduction: string;
   sections: TopicSection[];
   recap: string[];
-  exercises: FiveExercises;
+  exerciseBank: ExerciseBank;
   sources?: { title: string; url: string }[];
 };
 
-// Every published topic includes a complete five-question practice set.
-export type FiveExercises = [Exercise, Exercise, Exercise, Exercise, Exercise];
+// Five concepts, with two exercise kinds and three alternatives per kind.
+export type ExerciseVariants = [Exercise, Exercise, Exercise];
+export type ExerciseConcept = {
+  id: string;
+  apply: ExerciseVariants;
+  identify: ExerciseVariants;
+};
+export type ExerciseBank = [ExerciseConcept, ExerciseConcept, ExerciseConcept, ExerciseConcept, ExerciseConcept];
