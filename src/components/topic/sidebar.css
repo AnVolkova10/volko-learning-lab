@@ -1,0 +1,104 @@
+/* Topic table of contents, including mobile layout. */
+.lesson-sidebar {
+  position: sticky;
+  top: 30px;
+  align-self: start;
+  padding-top: 8px;
+}
+
+.lesson-sidebar .eyebrow {
+  font-size: 9px;
+  color: #78677f;
+  margin-bottom: 17px;
+}
+
+.lesson-sidebar nav > a {
+  display: flex;
+  gap: 10px;
+  font-size: 11px;
+  color: #7c727f;
+  line-height: 1.6;
+  padding: 10px 0;
+}
+
+.lesson-sidebar nav > a:hover {
+  color: var(--violet);
+}
+
+.lesson-sidebar nav > a > span {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-family: var(--serif);
+  background: #ede6f4;
+  border-radius: 4px;
+  color: #8765af;
+}
+
+.sidebar-note {
+  border-top: 1px solid var(--line);
+  margin-top: 28px;
+  padding-top: 25px;
+  font-family: var(--serif);
+  font-size: 16px;
+  color: #77617f;
+  line-height: 1.7;
+}
+
+.sidebar-note em {
+  font-size: 13px;
+  color: #796775;
+}
+
+[data-theme="dark"] .lesson-sidebar nav > a > span {
+  background: var(--accent-surface);
+  color: var(--violet);
+}
+
+[data-theme="dark"] .lesson-sidebar .eyebrow {
+  color: var(--violet);
+}
+
+[data-theme="dark"] .lesson-sidebar nav > a {
+  color: var(--muted);
+}
+
+[data-theme="dark"] .lesson-sidebar nav > a:hover {
+  color: var(--violet);
+}
+
+[data-theme="dark"] .sidebar-note,
+[data-theme="dark"] .sidebar-note em {
+  color: #cbb4db;
+}
+
+@media (max-width: 760px) {
+  .lesson-sidebar {
+    position: static;
+  }
+  .lesson-sidebar nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .lesson-sidebar .eyebrow {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  .lesson-sidebar nav > a {
+    font-size: 10px;
+    border: 1px solid var(--line);
+    padding: 7px 9px;
+    border-radius: 6px;
+    align-items: center;
+  }
+  .lesson-sidebar nav > a > span {
+    width: 18px;
+    height: 18px;
+  }
+  .sidebar-note {
+    display: none;
+  }
+}

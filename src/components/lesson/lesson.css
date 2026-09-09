@@ -1,0 +1,259 @@
+/* Reusable reading blocks: definition, analogy, code, takeaway and recap. */
+.recap li {
+  font-size: 14px;
+  line-height: 1.85;
+  color: #766d77;
+}
+
+.analogy {
+  display: flex;
+  gap: 15px;
+  padding: 20px 24px;
+  background: #efeee7;
+  border-radius: 9px;
+  margin: 25px 0 30px;
+}
+
+.analogy > span {
+  font-size: 27px;
+  color: #b6a37c;
+  line-height: 1;
+}
+
+.analogy h3 {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 5px;
+  color: #786345;
+}
+
+.analogy p {
+  font-size: 13px;
+  margin: 0;
+  color: #756957;
+}
+
+.example-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 25px 0 9px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.example-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.example-dot.before {
+  background: #c29281;
+}
+
+.example-dot.after {
+  background: #90a388;
+}
+
+.code-example {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #292630;
+  margin: 18px 0 26px;
+}
+
+.code-label {
+  color: #a99bbd;
+  border-bottom: 1px solid #40394a;
+  padding: 11px 20px;
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.code-label > span:last-child {
+  letter-spacing: 0.4px;
+  color: #b9adbf;
+}
+
+pre {
+  margin: 0;
+  padding: 21px;
+  font-size: 12px;
+  line-height: 1.8;
+  overflow: auto;
+  tab-size: 2;
+  color: #d9cde8;
+  background: #292630;
+  border-radius: 8px;
+}
+
+pre:focus-visible {
+  outline-offset: -4px;
+}
+
+code {
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+}
+
+.takeaway {
+  background: #eee7f5;
+  border-left: 2px solid #b194ce;
+  border-radius: 0 8px 8px 0;
+  padding: 17px 22px;
+  display: flex;
+  gap: 16px;
+  margin-top: 23px;
+}
+
+.takeaway > span {
+  font-size: 25px;
+  color: #9e7dba;
+}
+
+.takeaway p {
+  margin: 0;
+  color: #725785;
+  font-size: 13px;
+}
+
+.takeaway strong {
+  display: block;
+  color: #70478d;
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+
+.recap {
+  padding: 33px;
+  background: #eeefe7;
+  border-radius: 12px;
+}
+
+.recap ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.recap li {
+  padding-left: 7px;
+  margin-bottom: 13px;
+  font-size: 13px;
+  color: #59684e;
+}
+
+.recap li::marker {
+  color: #9aab8e;
+}
+
+.recap p.eyebrow {
+  color: #5a6e4b;
+}
+
+.recap .recap-note {
+  margin: 22px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid #daddcd;
+  font-family: var(--serif);
+  font-style: italic;
+  color: #5b6f4e;
+  font-size: 16px;
+}
+
+[data-theme="dark"] .analogy {
+  background: var(--sand-surface);
+}
+
+[data-theme="dark"] .analogy > span,
+[data-theme="dark"] .analogy h3 {
+  color: var(--sand);
+}
+
+[data-theme="dark"] .analogy p {
+  color: #d5c5ad;
+}
+
+[data-theme="dark"] .example-dot.before {
+  background: #d79f8a;
+}
+
+[data-theme="dark"] .example-dot.after {
+  background: var(--sage);
+}
+
+[data-theme="dark"] .code-example {
+  background: #141119;
+  color: #e0d3ed;
+}
+
+[data-theme="dark"] .code-label,
+[data-theme="dark"] .code-label > span:last-child {
+  color: #c6b3d9;
+  border-color: #41334c;
+}
+
+[data-theme="dark"] .takeaway {
+  background: var(--accent-surface);
+  border-color: #b28ed8;
+}
+
+[data-theme="dark"] .takeaway > span,
+[data-theme="dark"] .takeaway strong {
+  color: #dfbfff;
+}
+
+[data-theme="dark"] .takeaway p {
+  color: #d6c4e5;
+}
+
+[data-theme="dark"] .recap {
+  background: var(--sage-surface);
+}
+
+[data-theme="dark"] .recap li,
+[data-theme="dark"] .recap li::marker,
+[data-theme="dark"] .recap p.eyebrow,
+[data-theme="dark"] .recap .recap-note {
+  color: var(--sage);
+}
+
+[data-theme="dark"] .recap .recap-note {
+  border-color: #495444;
+}
+
+@media (max-width: 480px) {
+  .analogy {
+    padding: 18px;
+    gap: 10px;
+  }
+  pre {
+    font-size: 11px;
+    padding: 16px;
+  }
+  .recap {
+    padding: 23px;
+  }
+}
+
+/* Definitions use direct wording; analogies remain a separate block. */
+.simple-definition {
+  margin: 0 0 24px;
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.simple-definition h3 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--violet);
+}
+.simple-definition p {
+  margin: 0;
+  color: var(--text);
+}
+:root[data-theme="dark"] .simple-definition p {
+  color: var(--text);
+}

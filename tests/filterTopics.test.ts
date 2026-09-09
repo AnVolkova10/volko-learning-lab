@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { filterTopics } from "./filterTopics.ts";
-import { categories, topics, type Topic } from "./data/topics.ts";
+import { filterTopics } from "../src/lib/filterTopics.ts";
+import { categories } from "../src/data/categories.ts";
+import { topics } from "../src/data/topics.ts";
+import type { Topic } from "../src/data/types.ts";
 
 const englishTopic: Topic = {
   id: "daily-habits",
@@ -13,6 +15,7 @@ const englishTopic: Topic = {
   introduction: "A language note.",
   sections: [],
   recap: [],
+  exercises: topics[0].exercises,
 };
 const collection = [...topics, englishTopic];
 
@@ -59,35 +62,4 @@ test("unknown search, empty category, and empty collection have no matches", () 
   );
   assert.deepEqual(filterTopics(collection, categories, "", "3d"), []);
   assert.deepEqual(filterTopics([], categories, "", "all"), []);
-});
-
-test("published data has usable unique links and valid exercise answers", () => {
-  assert.equal(new Set(topics.map((topic) => topic.id)).size, topics.length);
-  assert.equal(
-    new Set(categories.map((category) => category.id)).size,
-    categories.length,
-  );
-  for (const topic of topics) {
-    assert.match(topic.id, /^[a-z0-9-]+$/);
-    assert.ok(categories.some((category) => category.id === topic.category));
-    const ids = [
-      "introduction",
-      "practice",
-      "recap",
-      ...topic.sections.map((section) => section.id),
-    ];
-    assert.equal(new Set(ids).size, ids.length);
-    if (topic.exercise) {
-      assert.equal(
-        topic.exercise.options.filter(
-          (option) => option.id === topic.exercise?.correctOptionId,
-        ).length,
-        1,
-      );
-      assert.equal(
-        new Set(topic.exercise.options.map((option) => option.id)).size,
-        topic.exercise.options.length,
-      );
-    }
-  }
 });

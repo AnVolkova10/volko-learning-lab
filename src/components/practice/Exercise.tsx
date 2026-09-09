@@ -1,8 +1,14 @@
 import { useRef, useState } from "react";
-import type { Exercise as ExerciseData } from "../data/topics";
-import { CodeExample } from "./LessonBlocks";
+import type { Exercise as ExerciseData } from "../../data/types";
+import { CodeExample } from "../lesson/LessonBlocks";
 
-export function Exercise({ exercise }: { exercise: ExerciseData }) {
+export function Exercise({
+  exercise,
+  questionNumber,
+}: {
+  exercise: ExerciseData;
+  questionNumber: number;
+}) {
   const firstAnswer = useRef<HTMLInputElement>(null);
   const [selected, setSelected] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -11,8 +17,8 @@ export function Exercise({ exercise }: { exercise: ExerciseData }) {
 
   return (
     <div className="exercise-card">
-      <p className="eyebrow">A LITTLE PRACTICE</p>
-      <h2>Put your intuition to the test.</h2>
+      <p className="eyebrow">QUESTION {questionNumber} OF 5</p>
+      <h3 className="exercise-title">{exercise.title}</h3>
       <p>{exercise.prompt}</p>
       {exercise.code && (
         <CodeExample

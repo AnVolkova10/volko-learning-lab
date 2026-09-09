@@ -1,0 +1,40 @@
+/* Theme switch control. Component dark colors live beside each component. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--violet);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.theme-toggle:hover {
+  background: var(--accent-surface);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 480px) {
+  .theme-toggle {
+    width: 38px;
+    min-height: 38px;
+    padding: 8px;
+  }
+  .theme-toggle-label {
+    display: none;
+  }
+}

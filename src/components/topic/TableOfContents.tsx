@@ -1,16 +1,11 @@
-import type { TopicSection } from "../data/topics";
+import type { TopicSection } from "../../data/types";
 
 type TableOfContentsProps = {
   topicId: string;
   sections: Pick<TopicSection, "id" | "title" | "letter">[];
-  hasExercise: boolean;
 };
 
-export function TableOfContents({
-  topicId,
-  sections,
-  hasExercise,
-}: TableOfContentsProps) {
+export function TableOfContents({ topicId, sections }: TableOfContentsProps) {
   return (
     <aside className="lesson-sidebar">
       <nav aria-label="On this page">
@@ -22,11 +17,11 @@ export function TableOfContents({
             {section.title}
           </a>
         ))}
-        {hasExercise && (
-          <a href={`#/topics/${topicId}/practice`}>
-            ✳ &nbsp; Put it into practice
-          </a>
-        )}
+
+        <a href={`#/topics/${topicId}/practice`}>
+          ✳ &nbsp; Five practice questions
+        </a>
+
         <a href={`#/topics/${topicId}/recap`}>Your pocket recap</a>
       </nav>
       <p className="sidebar-note">

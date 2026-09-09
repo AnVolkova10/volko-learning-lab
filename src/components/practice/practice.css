@@ -1,0 +1,130 @@
+/* Question cards, options, feedback and practice progress. */
+.practice-section {
+  margin: 20px 0 45px;
+}
+
+.exercise-card {
+  background: #f0eaf7;
+  border: 1px solid #e1d5ec;
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.exercise-card pre {
+  margin: 23px 0;
+}
+
+fieldset {
+  border: 0;
+  margin: 0 0 22px;
+  padding: 0;
+  min-width: 0;
+}
+
+legend {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: 14px;
+  line-height: 1.7;
+}
+
+.exercise-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.exercise-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 13px 15px;
+  border: 1px solid #e0d6e9;
+  background: #fbf9fe;
+  font-size: 12px;
+  color: #7c6a8b;
+  border-radius: 6px;
+}
+
+.exercise-option.chosen {
+  border-color: #aa8bc8;
+  background: #e7dcf2;
+  color: #68468b;
+}
+
+.exercise-option input {
+  accent-color: var(--violet);
+  margin: 0;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.exercise-feedback {
+  border-top: 1px solid #d9cce5;
+  padding-top: 20px;
+  margin-top: 25px;
+}
+
+.exercise-feedback strong {
+  font-size: 14px;
+  color: #856a45;
+}
+
+.exercise-feedback.correct strong {
+  color: #57764c;
+}
+
+.exercise-feedback p {
+  font-size: 13px;
+  margin: 7px 0 17px;
+}
+
+[data-theme="dark"] .exercise-feedback {
+  border-color: var(--line);
+}
+
+[data-theme="dark"] .exercise-card {
+  background: #2b2235;
+  border-color: #584469;
+}
+
+[data-theme="dark"] .exercise-option {
+  background: var(--surface);
+  color: #ded0e9;
+  border-color: #6a577a;
+}
+
+[data-theme="dark"] .exercise-option.chosen {
+  background: #423052;
+  border-color: #c6a6f2;
+  color: #f1e4ff;
+}
+
+[data-theme="dark"] .exercise-feedback strong {
+  color: var(--sand);
+}
+
+[data-theme="dark"] .exercise-feedback.correct strong {
+  color: #c3daa9;
+}
+
+@media (max-width: 480px) {
+  .exercise-card {
+    padding: 20px 16px;
+  }
+}
+
+.practice-questions {
+  display: grid;
+  gap: 24px;
+}
+.exercise-title {
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 18px;
+}

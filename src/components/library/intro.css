@@ -1,0 +1,198 @@
+/* Library introduction and decorative paper note. */
+.intro {
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  align-items: center;
+  padding: 77px 0 67px;
+  gap: 34px;
+}
+
+.intro .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #706385;
+  margin-bottom: 20px;
+}
+
+.intro-copy {
+  font-size: 14px;
+  color: #6d6761;
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+
+.curiosity-note {
+  position: relative;
+  height: 310px;
+  display: grid;
+  place-items: center;
+}
+
+.paper-note {
+  background: #f3eee3;
+  width: 217px;
+  height: 248px;
+  padding: 26px;
+  transform: rotate(7deg);
+  box-shadow: 3px 9px 20px #544f4410;
+  border: 1px solid #e9e2d3;
+  border-radius: 2px;
+  position: relative;
+}
+
+.handwriting {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  color: #756a55;
+}
+
+.paper-rule {
+  display: block;
+  border-bottom: 1px solid #dbd3c4;
+  margin: 13px 0 15px;
+}
+
+.paper-note p {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.23;
+  letter-spacing: -0.7px;
+}
+
+.paper-note em {
+  color: #7c6b9a;
+}
+
+.note-pin {
+  position: absolute;
+  width: 72px;
+  height: 27px;
+  background: #e5dccb8c;
+  top: 16px;
+  left: calc(50% - 35px);
+  z-index: 2;
+  transform: rotate(-6deg);
+}
+
+.note-flower {
+  color: #b59b6c;
+  font-size: 38px;
+  position: absolute;
+  right: 18px;
+  bottom: 10px;
+}
+
+.note-caption {
+  position: absolute;
+  bottom: -3px;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 1.6px;
+  color: #72695c;
+}
+
+.orbit {
+  position: absolute;
+  border: 1px solid #e7e0ee;
+  border-radius: 50%;
+  width: 340px;
+  height: 220px;
+  transform: rotate(-28deg);
+}
+
+.orbit-two {
+  width: 290px;
+  height: 300px;
+  border-style: dashed;
+  border-color: #e5ded580;
+  transform: rotate(40deg);
+}
+
+.orbit-spark {
+  position: absolute;
+  right: 16px;
+  top: 19px;
+  font-size: 52px;
+  color: #a38bbd;
+}
+
+[data-theme="dark"] .intro .eyebrow {
+  color: var(--violet);
+}
+
+[data-theme="dark"] .intro-copy {
+  color: var(--muted);
+}
+
+[data-theme="dark"] .paper-note {
+  background: var(--sand-surface);
+  border-color: #514639;
+  box-shadow: 3px 9px 25px #0004;
+}
+
+[data-theme="dark"] .handwriting,
+[data-theme="dark"] .note-caption,
+[data-theme="dark"] .note-flower {
+  color: var(--sand);
+}
+
+[data-theme="dark"] .paper-note em,
+[data-theme="dark"] .orbit-spark {
+  color: var(--violet);
+}
+
+[data-theme="dark"] .paper-rule {
+  border-color: #665843;
+}
+
+[data-theme="dark"] .note-pin {
+  background: #b09b7270;
+}
+
+[data-theme="dark"] .orbit {
+  border-color: #45344f;
+}
+
+[data-theme="dark"] .orbit-two {
+  border-color: #5e4f404f;
+}
+
+@media (min-width: 1500px) {
+  .intro {
+    padding-top: 92px;
+    padding-bottom: 85px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .curiosity-note {
+    transform: scale(0.88);
+    transform-origin: center;
+  }
+  .intro {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 760px) {
+  .intro {
+    padding: 48px 0 38px;
+    grid-template-columns: 1fr;
+  }
+  .intro-copy {
+    max-width: 440px;
+    font-size: 13px;
+  }
+  .curiosity-note {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.4px;
+  }
+}

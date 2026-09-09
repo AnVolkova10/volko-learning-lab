@@ -5,6 +5,15 @@ type CodeExampleProps = {
   language?: string;
 };
 
+export function SimpleDefinition({ text }: { text: string }) {
+  return (
+    <div className="simple-definition">
+      <h3>In plain words</h3>
+      <p>{text}</p>
+    </div>
+  );
+}
+
 export function CodeExample({
   code,
   accessibleLabel,

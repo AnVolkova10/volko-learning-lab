@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { topics } from "./data/topics";
-import { Library } from "./components/Library";
-import { TopicDetail } from "./components/TopicDetail";
-import { ThemeToggle } from "./components/ThemeToggle";
-import { BackToLibrary } from "./components/LibraryParts";
+import { Library } from "./components/library/Library";
+import { TopicDetail } from "./components/topic/TopicDetail";
+import { ThemeToggle } from "./components/theme/ThemeToggle";
+import { BackToLibrary } from "./components/shared/LibraryParts";
 
 function focusPage(hash: string) {
+  // "#/topics/solid/srp" -> ["#", "topics", "solid", "srp"].
+  // The last segment is an optional section inside the current lesson.
   const sectionId = hash.split("/")[3];
   const destination = sectionId
     ? document.getElementById(sectionId)
@@ -19,12 +21,15 @@ export default function App() {
   const [hash, setHash] = useState(window.location.hash);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
+  // Ignore "#"; read the view name and the topic ID from the URL.
   const [, route, topicId] = hash.split("/");
   const isLibrary = !hash || hash === "#" || hash === "#/";
   const topic =
     route === "topics" ? topics.find((item) => item.id === topicId) : undefined;
 
   useEffect(() => {
+    // A normal link or browser Back/Forward changes the hash.
+    // Copy it into React state so React renders the matching view.
     const onHashChange = () => setHash(window.location.hash);
     // Clicking the current section again does not emit a hashchange event.
     const onSamePageLink = (event: MouseEvent) => {
@@ -55,6 +60,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    // Effects run after React has rendered, so the destination exists now.
     document.title = topic
       ? `${topic.title} · Volko's Library`
       : "Volko's Learning Library";
@@ -118,7 +124,7 @@ export default function App() {
         )}
       </main>
       <footer className="site-footer shell">
-        <span>Volko © 2026</span>
+        <span>Ángela Curzi 2026</span>
         <span>Stay curious. Keep a little of what you learn.</span>
         <BackToLibrary />
       </footer>

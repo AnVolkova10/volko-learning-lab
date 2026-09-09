@@ -1,8 +1,15 @@
 import type { CSSProperties } from "react";
-import { categories, type Topic } from "../data/topics";
-import { Exercise } from "./Exercise";
-import { Analogy, CodeExample, Recap, Takeaway } from "./LessonBlocks";
-import { BackToLibrary, Tags } from "./LibraryParts";
+import { categories } from "../../data/categories";
+import type { Topic } from "../../data/types";
+import { Practice } from "../practice/Practice";
+import {
+  Analogy,
+  CodeExample,
+  Recap,
+  Takeaway,
+  SimpleDefinition,
+} from "../lesson/LessonBlocks";
+import { BackToLibrary, Tags } from "../shared/LibraryParts";
 import { TableOfContents } from "./TableOfContents";
 
 export function TopicDetail({ topic }: { topic: Topic }) {
@@ -27,11 +34,7 @@ export function TopicDetail({ topic }: { topic: Topic }) {
         <Tags tags={topic.tags} />
       </header>
       <div className="lesson-layout">
-        <TableOfContents
-          topicId={topic.id}
-          sections={topic.sections}
-          hasExercise={Boolean(topic.exercise)}
-        />
+        <TableOfContents topicId={topic.id} sections={topic.sections} />
         <div className="lesson-content">
           <section id="introduction" tabIndex={-1} className="lesson-intro">
             <p className="eyebrow">BEFORE WE BEGIN</p>
@@ -56,6 +59,7 @@ export function TopicDetail({ topic }: { topic: Topic }) {
                   <h2>{section.title}</h2>
                 </div>
               </div>
+              <SimpleDefinition text={section.definition} />
               <p>{section.explanation}</p>
               {section.analogy && <Analogy text={section.analogy} />}
               {section.mistake && (
@@ -92,11 +96,7 @@ export function TopicDetail({ topic }: { topic: Topic }) {
               {section.takeaway && <Takeaway text={section.takeaway} />}
             </section>
           ))}
-          {topic.exercise && (
-            <section id="practice" tabIndex={-1} className="practice-section">
-              <Exercise exercise={topic.exercise} />
-            </section>
-          )}
+          <Practice exercises={topic.exercises} />
           <Recap items={topic.recap} />
           {topic.sources && (
             <details className="sources">

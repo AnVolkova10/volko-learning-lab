@@ -1,7 +1,8 @@
 import type { CSSProperties } from "react";
-import { categories, topics } from "../data/topics";
-import { filterTopics } from "../filterTopics";
-import { Tags } from "./LibraryParts";
+import { topics } from "../../data/topics";
+import { categories } from "../../data/categories";
+import { filterTopics } from "../../lib/filterTopics";
+import { Tags } from "../shared/LibraryParts";
 
 type LibraryProps = {
   query: string;
@@ -245,7 +246,7 @@ export function Library({
                 <Tags tags={topic.tags} />
                 <div className="card-bottom">
                   <span>{topic.readMinutes} min read</span>
-                  {topic.exercise && (
+                  {topic.exercises && (
                     <span>
                       <span className="tiny-star" aria-hidden="true">
                         ✳

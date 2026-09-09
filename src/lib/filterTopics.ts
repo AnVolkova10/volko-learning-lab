@@ -1,4 +1,4 @@
-import type { Category, Topic } from "./data/topics.ts";
+import type { Category, Topic } from "../data/types.ts";
 
 // Every search word must match somewhere in the topic's searchable fields.
 export function filterTopics(
