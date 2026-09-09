@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { topics } from "./data/topics";
 import { Library } from "./components/library/Library";
 import { TopicDetail } from "./components/topic/TopicDetail";
-import { ThemeToggle } from "./components/theme/ThemeToggle";
+import { SiteHeader } from "./components/header/SiteHeader";
 import { BackToLibrary } from "./components/shared/LibraryParts";
 
 function focusPage(hash: string) {
@@ -79,31 +79,7 @@ export default function App() {
       >
         Skip to content
       </a>
-      <header className="site-header shell">
-        <a
-          className="brand"
-          href="#/"
-          aria-label="Volko's learning library home"
-        >
-          <span className="brand-icon" aria-hidden="true">
-            v<span>✳</span>
-          </span>
-          <span>
-            the learning library
-            <span className="brand-subtitle">A COLLECTION BY VOLKO</span>
-          </span>
-        </a>
-        <div className="header-actions">
-          <ThemeToggle />
-          <a
-            className="nav-link"
-            href="#/"
-            aria-current={isLibrary ? "page" : undefined}
-          >
-            My library <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </header>
+      <SiteHeader isLibrary={isLibrary} />
       <main id="main" tabIndex={-1} className="shell">
         {isLibrary ? (
           <Library
@@ -124,7 +100,7 @@ export default function App() {
         )}
       </main>
       <footer className="site-footer shell">
-        <span>Ángela Curzi 2026</span>
+        <span>© 2026 Ángela Curzi</span>
         <span>Stay curious. Keep a little of what you learn.</span>
         <BackToLibrary />
       </footer>

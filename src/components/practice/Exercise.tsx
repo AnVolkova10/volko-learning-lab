@@ -6,10 +6,12 @@ export function Exercise({
   exercise,
   questionNumber,
   questionCount,
+  onNext,
 }: {
   exercise: ExerciseData;
   questionNumber: number;
   questionCount: number;
+  onNext: () => void;
 }) {
   const firstAnswer = useRef<HTMLInputElement>(null);
   const [selected, setSelected] = useState("");
@@ -19,7 +21,9 @@ export function Exercise({
 
   return (
     <div className="exercise-card">
-      <p className="eyebrow">QUESTION {questionNumber} OF {questionCount}</p>
+      <p className="eyebrow">
+        QUESTION {questionNumber} OF {questionCount}
+      </p>
       <h3 className="exercise-title">{exercise.title}</h3>
       <p>{exercise.prompt}</p>
       {exercise.code && (
@@ -80,6 +84,12 @@ export function Exercise({
               }}
             >
               Try again <span aria-hidden="true">↻</span>
+            </button>
+            <button className="button primary next-question" onClick={onNext}>
+              {questionNumber === questionCount
+                ? "Finish practice"
+                : "Next question"}
+              <span aria-hidden="true">→</span>
             </button>
           </div>
         )}

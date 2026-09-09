@@ -1,13 +1,14 @@
 /* Load general rules first, then feature and reusable-block rules. */
 @import "./base.css";
 @import "../App.css";
-@import "../components/shared/shared.css";
-@import "../components/library/intro.css";
-@import "../components/library/featured.css";
-@import "../components/library/library.css";
-@import "../components/library/cards.css";
-@import "../components/topic/topic.css";
-@import "../components/topic/sidebar.css";
-@import "../components/lesson/lesson.css";
-@import "../components/practice/practice.css";
-@import "../components/theme/theme.css";
+@import "../components/shared/LibraryParts.css";
+@import "../components/library/LibraryIntro.css";
+@import "../components/library/FeaturedTopic.css";
+@import "../components/library/TopicCollection.css";
+@import "../components/topic/TopicDetail.css";
+@import "../components/topic/TableOfContents.css";
+@import "../components/lesson/LessonBlocks.css";
+@import "../components/practice/Exercise.css";
+@import "../components/theme/ThemeToggle.css";
+@import "../components/practice/Practice.css";
+@import "../components/header/SiteHeader.css";

@@ -221,9 +221,20 @@
 }
 
 @media (max-width: 760px) {
-  .shell { width: calc(100% - 32px); }
-  .button, .text-link { min-height: 44px; }
-  .button { font-size: 14px; }
-  .tags > span { font-size: 12px; }
-  .eyebrow { font-size: 11px; }
+  .shell {
+    width: calc(100% - 32px);
+  }
+  .button,
+  .text-link {
+    min-height: 44px;
+  }
+  .button {
+    font-size: 14px;
+  }
+  .tags > span {
+    font-size: 12px;
+  }
+  .eyebrow {
+    font-size: 11px;
+  }
 }

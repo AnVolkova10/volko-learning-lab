@@ -2,7 +2,7 @@
 
 A personal learning library built with React, TypeScript, Vite, and plain CSS. SOLID is the first topic: five plain definitions, detailed explanations, analogies, before/after examples, and a bank of 30 practice questions (10 per visit).
 
-One file per topic. No backend, accounts, database, or editor. The browser saves only the light/dark preference; quiz answers last while the topic stays open.
+One file per topic. No backend, accounts, database, or editor. The browser saves only the light/dark preference; the current answer lasts until you advance to the next question. Reviewing starts the same selection again with blank answers.
 
 ## Run locally
 
@@ -24,55 +24,54 @@ npm run dev
 
 Component paths below are relative to `src/components/`. Folders group related work; small related components can share a file.
 
-| File                         | Responsibility                                                                                                  |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `index.html`                 | HTML entry point, metadata, React mounting element, and small pre-paint theme initializer.                      |
-| `src/main.tsx`               | Mounts `App` with `createRoot` and `StrictMode`, and loads the CSS entry point.                                 |
-| `src/App.tsx`                | URL navigation, search/filter state, screen selection, shared header/footer.                                    |
-| `src/App.css`                | Header, footer, and missing-page layout.                                                                        |
-| `src/data/types.ts`          | Contracts for categories, sections, questions, balanced exercise banks, and topics.                                  |
-| `src/data/categories.ts`     | Category IDs, labels, and accent colors.                                                                        |
-| `src/data/topics.ts`         | Small catalog of topic imports. The first entry is featured.                                                    |
-| `src/data/topics/solid.ts`   | SOLID content only. Code strings are displayed, never executed by the app.                                      |
-| `src/lib/filterTopics.ts`    | Pure matching logic: takes data and criteria, returns matches without mutation or browser access.               |
-| `library/Library.tsx`        | Introduction, feature, search, category filters, cards, empty state.                                            |
-| `library/intro.css`          | Introduction and decorative paper note.                                                                         |
-| `library/featured.css`       | Featured card and decorative letter blocks.                                                                     |
-| `library/library.css`        | Collection heading, search, filters, empty state, closing note.                                                 |
-| `library/cards.css`          | Topic cards and collection note.                                                                                |
-| `topic/TopicDetail.tsx`      | Composes a topic's reusable reading and practice blocks.                                                        |
-| `topic/TableOfContents.tsx`  | Builds links from topic ID and section navigation fields.                                                       |
-| `topic/topic.css`            | Reading layout, header, and concept sections.                                                                   |
-| `topic/sidebar.css`          | Desktop/mobile table of contents.                                                                               |
-| `lesson/LessonBlocks.tsx`    | Stateless SimpleDefinition, Analogy, CodeExample, Takeaway, and Recap.                                          |
-| `lesson/lesson.css`          | Styles for those reading blocks.                                                                                |
-| `practice/Practice.tsx`      | Selects ten questions once per visit and renders the practice section.                                                                     |
-| `practice/Exercise.tsx`      | One question's selected answer, submission, feedback, and retry focus.                                          |
-| `practice/practice.css`      | Question layout, choices, feedback.                                                                             |
-| `shared/LibraryParts.tsx`    | Reusable Tags and BackToLibrary components.                                                                     |
-| `shared/shared.css`          | Shared tags, badges, buttons, and links.                                                                        |
-| `theme/ThemeToggle.tsx`      | Switches theme and safely stores the preference.                                                                |
-| `theme/theme.css`            | Theme-button appearance and responsive sizing.                                                                  |
-| `src/styles/index.css`       | Explicit CSS load order: general rules before feature/block rules.                                              |
-| `src/styles/base.css`        | Global typography, palette variables, reset, accessibility preferences.                                         |
-| `tests/filterTopics.test.ts` | Search fields, case, multiple words, combined filters, empty results.                                           |
-| `tests/content.test.ts`      | Unique links, categories, definitions, thirty questions, valid answers.                                           |
-| `tests/render.test.ts`       | React markup checks for five definitions and ten questions and non-code topics. This is not a browser interaction test. |
-| `package.json`               | Commands and dependencies.                                                                                      |
-| `package-lock.json`          | Exact dependency resolution; generated by npm.                                                                  |
-| `vite.config.ts`             | React support in Vite.                                                                                          |
-| `tsconfig.json`              | Strict TypeScript checking for application and tests.                                                           |
-| `.nvmrc`                     | Recommended Node major version: 24.                                                                             |
-| `.gitignore`                 | Excludes generated output, dependencies, local configuration, common credentials.                               |
-| `public/favicon.svg`         | Browser-tab icon.                                                                                               |
+| File                                   | Responsibility                                                                                                                |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `index.html`                           | HTML entry point, metadata, React mounting element, and small pre-paint theme initializer.                                    |
+| `src/main.tsx`                         | Mounts `App` with `createRoot` and `StrictMode`, and loads the CSS entry point.                                               |
+| `src/App.tsx`                          | URL navigation, search/filter state, screen selection, shared header/footer.                                                  |
+| `src/App.css`                          | Skip link, footer, and missing-page layout.                                                                                   |
+| `src/data/types.ts`                    | Contracts for categories, sections, questions, balanced exercise banks, and topics.                                           |
+| `src/data/categories.ts`               | Category IDs, labels, and accent colors.                                                                                      |
+| `src/data/topics.ts`                   | Small catalog of topic imports. The first entry is featured.                                                                  |
+| `src/data/topics/solid.ts`             | SOLID content only. Code strings are displayed, never executed by the app.                                                    |
+| `src/lib/filterTopics.ts`              | Pure matching logic: takes data and criteria, returns matches without mutation or browser access.                             |
+| `library/Library.tsx`                  | Composes the introduction, featured topic, and searchable collection.                                                         |
+| `library/LibraryIntro.tsx` + `.css`    | Introduction and decorative paper note.                                                                                       |
+| `library/FeaturedTopic.tsx` + `.css`   | Featured card and decorative letter blocks.                                                                                   |
+| `library/TopicCollection.tsx` + `.css` | Search/filter logic, collection heading, topic cards, empty state, closing note.                                              |
+| `topic/TopicDetail.tsx`                | Composes a topic's reusable reading and practice blocks.                                                                      |
+| `topic/TableOfContents.tsx`            | Builds links from topic ID and section navigation fields.                                                                     |
+| `topic/TopicDetail.css`                | Reading layout, header, and concept sections.                                                                                 |
+| `topic/TableOfContents.css`            | Desktop/mobile table of contents.                                                                                             |
+| `lesson/LessonBlocks.tsx`              | Stateless SimpleDefinition, Analogy, CodeExample, Takeaway, and Recap.                                                        |
+| `lesson/LessonBlocks.css`              | Styles for those reading blocks.                                                                                              |
+| `practice/Practice.tsx`                | Selects ten questions once, owns the active index, progress, and completion screen.                                           |
+| `practice/Exercise.tsx`                | One question's selected answer, submission, feedback, and retry focus.                                                        |
+| `practice/Exercise.css`                | Question layout, choices, feedback.                                                                                           |
+| `shared/LibraryParts.tsx`              | Reusable Tags and BackToLibrary components.                                                                                   |
+| `shared/LibraryParts.css`              | Shared tags, badges, buttons, and links.                                                                                      |
+| `theme/ThemeToggle.tsx`                | Switches theme and safely stores the preference.                                                                              |
+| `theme/ThemeToggle.css`                | Theme-button appearance and responsive sizing.                                                                                |
+| `src/styles/index.css`                 | Explicit CSS load order: general rules before feature/block rules.                                                            |
+| `src/styles/base.css`                  | Global typography, palette variables, reset, accessibility preferences.                                                       |
+| `tests/filterTopics.test.ts`           | Search fields, case, multiple words, combined filters, empty results.                                                         |
+| `tests/content.test.ts`                | Unique links, categories, definitions, thirty questions, valid answers.                                                       |
+| `tests/render.test.ts`                 | React markup checks for five definitions and one active question and non-code topics. This is not a browser interaction test. |
+| `package.json`                         | Commands and dependencies.                                                                                                    |
+| `package-lock.json`                    | Exact dependency resolution; generated by npm.                                                                                |
+| `vite.config.ts`                       | React support in Vite.                                                                                                        |
+| `tsconfig.json`                        | Strict TypeScript checking for application and tests.                                                                         |
+| `.nvmrc`                               | Recommended Node major version: 24.                                                                                           |
+| `.gitignore`                           | Excludes generated output, dependencies, local configuration, common credentials.                                             |
+| `public/favicon.svg`                   | Browser-tab icon.                                                                                                             |
 
 `node_modules/` and `dist/` are generated and ignored. Do not edit them.
 
 ## Data flow
 
-`topics/solid.ts` exports a `Topic`. `data/topics.ts` registers it. `App` finds the requested topic by ID and passes it to `TopicDetail`. The page maps its sections to reusable blocks. `Practice` selects one variant per concept and kind, shuffles those ten questions, and maps them to independent `Exercise` components. A lazy state initializer keeps that draw stable while answering, changing theme, or following section links. Leaving the topic and returning starts a new draw; random draws may repeat questions.
+`topics/solid.ts` exports a `Topic`. `data/topics.ts` registers it. `App` finds the requested topic by ID and passes it to `TopicDetail`. The page maps its sections to reusable blocks. `Practice` selects one variant per concept and kind, shuffles those ten questions, and renders one `Exercise` at a time. Checking reveals feedback; Next question advances; Finish practice shows completion. The question key resets local answer state for each new question. A lazy state initializer keeps that draw stable while answering, changing theme, or following section links. Leaving the topic and returning starts a new draw; random draws may repeat questions.
 
-`Library` calls `filterTopics`. Every search word must occur somewhere in the title, description, category label, or tags. Case and surrounding spaces are ignored. The category filter applies at the same time. `App` preserves these choices when you visit a lesson and return.
+`TopicCollection` calls `filterTopics`. Every search word must occur somewhere in the title, description, category label, or tags. Case and surrounding spaces are ignored. The category filter applies at the same time. `App` preserves these choices when you visit a lesson and return.
 
 ## The hash functions in App
 
@@ -114,7 +113,7 @@ To add a category, add `{ id: "science", label: "Science", color: "#287b6c" }` t
 
 ## CSS and themes
 
-CSS is grouped by feature beside its TSX. Each sheet includes its responsive and dark overrides. Shared typography/palette variables belong in `base.css`; shared buttons/badges belong in `shared.css`. `index.css` makes the cascade order explicit. There is no duplicate light/dark component tree.
+CSS is grouped by feature beside its TSX. Each sheet includes its responsive and dark overrides. Shared typography/palette variables belong in `base.css`; shared buttons/badges belong in `LibraryParts.css`. `index.css` makes the cascade order explicit. There is no duplicate light/dark component tree.
 
 `index.html` applies the saved/system theme before painting. `ThemeToggle` handles later changes and stores `volko-theme`. If storage is blocked, switching still works for the current page. Quiz answers are not persisted.
 
@@ -143,3 +142,11 @@ Only commit content intended for publication: lesson data becomes downloadable J
 - `tests/selectExercises.test.ts`: verifies balance, uniqueness, every variant being reachable, shuffling, and no bank mutation using predictable random functions.
 
 Below 760px, lesson prose and answers use 16px text with 1.65 line height, code uses 14px, and question controls have at least 48px touch targets. Feature styles remain beside their components. Grid tracks use `minmax(0, 1fr)` and cards can shrink; long code scrolls inside its own block rather than widening the document. Desktop typography and spacing stay unchanged.
+
+## Component boundaries and gentle motion
+
+- `library/Library.tsx` is composition only, so it needs no CSS of its own. `LibraryIntro`, `FeaturedTopic`, and `TopicCollection` each own a matching stylesheet. Collection cards remain inside their collection because there is no second use requiring another public component yet.
+- `header/SiteHeader.tsx` and `SiteHeader.css` own the sticky header and its scroll listener. Separate expand/collapse thresholds prevent flickering near the transition. The listener is removed when unmounted.
+- `practice/Practice.css` owns progress, the sheet transition, and completion. `Exercise.css` owns the question, answers, and feedback.
+- `shared/LibraryParts.tsx` intentionally keeps two tiny reusable pieces together: Tags and BackToLibrary. Its matching CSS also supplies shared visual primitives (buttons, badges, links, shell). A stylesheet need not imply one React component per selector.
+- Animation uses CSS only, with no motion library. Reduced-motion preferences turn it off. Section links leave space for the sticky header; Next question returns focus to the question region.

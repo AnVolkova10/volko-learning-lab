@@ -1,0 +1,55 @@
+/* One question occupies this space; changing its key turns a fresh sheet. */
+.practice-section {
+  margin: 20px 0 45px;
+}
+.practice-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 24px 0 16px;
+  color: var(--violet);
+  font-size: 13px;
+}
+.practice-progress progress {
+  width: 40%;
+  height: 6px;
+  accent-color: var(--violet);
+}
+.practice-pages {
+  perspective: 1200px;
+  overflow: clip;
+  padding: 3px;
+  margin: -3px;
+  scroll-margin-top: 80px;
+}
+.practice-pages > .exercise-card {
+  transform-origin: left center;
+  animation: turn-sheet 360ms ease-out both;
+}
+.practice-complete {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px;
+  background: var(--sage-surface);
+}
+.practice-complete h3 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+}
+@keyframes turn-sheet {
+  from {
+    opacity: 0;
+    transform: translateX(18px) rotateY(-9deg) rotateZ(0.5deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotateY(0) rotateZ(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .practice-pages > .exercise-card {
+    animation: none;
+  }
+}

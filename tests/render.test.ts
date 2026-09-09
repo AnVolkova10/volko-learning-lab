@@ -7,7 +7,7 @@ import { topics } from "../src/data/topics.ts";
 import type { Topic } from "../src/data/types.ts";
 
 // This checks generated markup, not browser clicks or visual layout.
-test("the reading page renders five definitions and ten questions, including non-code topics", async () => {
+test("the reading page renders five definitions and one active question, including non-code topics", async () => {
   const server = await createServer({
     server: { middlewareMode: true },
     appType: "custom",
@@ -21,9 +21,9 @@ test("the reading page renders five definitions and ten questions, including non
       createElement(TopicDetail, { topic: solid }),
     );
     assert.equal((html.match(/class="simple-definition"/g) || []).length, 5);
-    assert.equal((html.match(/class="exercise-card"/g) || []).length, 10);
-    assert.equal((html.match(/<form/g) || []).length, 10);
-    assert.equal((html.match(/Check my answer/g) || []).length, 10);
+    assert.equal((html.match(/class="exercise-card"/g) || []).length, 1);
+    assert.equal((html.match(/<form/g) || []).length, 1);
+    assert.equal((html.match(/Check my answer/g) || []).length, 1);
 
     const nonCodeTopic: Topic = {
       ...solid,
@@ -37,17 +37,23 @@ test("the reading page renders five definitions and ten questions, including non
           explanation: "Use the present simple.",
         },
       ],
-      exerciseBank: solid.exerciseBank.map(concept => ({
+      exerciseBank: solid.exerciseBank.map((concept) => ({
         ...concept,
-        apply: concept.apply.map(question => ({ ...question, code: undefined })),
-        identify: concept.identify.map(question => ({ ...question, code: undefined })),
+        apply: concept.apply.map((question) => ({
+          ...question,
+          code: undefined,
+        })),
+        identify: concept.identify.map((question) => ({
+          ...question,
+          code: undefined,
+        })),
       })) as Topic["exerciseBank"],
     };
     const nonCodeHtml = renderToStaticMarkup(
       createElement(TopicDetail, { topic: nonCodeTopic }),
     );
     assert.equal((nonCodeHtml.match(/<pre/g) || []).length, 0);
-    assert.equal((nonCodeHtml.match(/class="exercise-card"/g) || []).length, 10);
+    assert.equal((nonCodeHtml.match(/class="exercise-card"/g) || []).length, 1);
     assert.ok(nonCodeHtml.includes("Daily habits"));
   } finally {
     await server.close();

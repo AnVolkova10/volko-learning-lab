@@ -1,7 +1,7 @@
 /* Topic table of contents, including mobile layout. */
 .lesson-sidebar {
   position: sticky;
-  top: 30px;
+  top: 80px;
   align-self: start;
   padding-top: 8px;
 }
@@ -104,5 +104,8 @@
 }
 
 @media (max-width: 760px) {
-  .lesson-sidebar nav > a { font-size: 14px; min-height: 44px; }
+  .lesson-sidebar nav > a {
+    font-size: 14px;
+    min-height: 44px;
+  }
 }
