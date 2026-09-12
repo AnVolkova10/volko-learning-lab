@@ -3,7 +3,13 @@ import type { ExerciseBank } from "../../data/types";
 import { selectExercises } from "../../lib/selectExercises";
 import { Exercise } from "./Exercise";
 
-export function Practice({ bank }: { bank: ExerciseBank }) {
+export function Practice({
+  bank,
+  introduction,
+}: {
+  bank: ExerciseBank;
+  introduction?: string;
+}) {
   const [exercises] = useState(() => selectExercises(bank));
   const [index, setIndex] = useState(0);
   const [finished, setFinished] = useState(false);
@@ -48,9 +54,8 @@ export function Practice({ bank }: { bank: ExerciseBank }) {
       <p className="eyebrow">PUT IT INTO PRACTICE</p>
       <h2>Ten questions. One step at a time.</h2>
       <p>
-        Five challenges to apply what you learned, and five to identify the
-        principle. Each visit brings a mixed selection from 30 questions. Check
-        the explanations and try again whenever you need to.
+        {introduction ||
+          "Five challenges to apply what you learned, and five to identify the principle. Each visit brings a mixed selection from 30 questions. Check the explanations and try again whenever you need to."}
       </p>
       <div className="practice-progress" aria-label="Practice progress">
         <span role="status">
@@ -76,8 +81,8 @@ export function Practice({ bank }: { bank: ExerciseBank }) {
             <p className="eyebrow">ONE MORE PAGE LEARNED</p>
             <h3>Ten questions explored.</h3>
             <p>
-              Take a moment to explain one principle in your own words. Your
-              recap is just below.
+              Take a moment to explain one idea in your own words. Your recap is
+              just below.
             </p>
             <button
               className="button primary"

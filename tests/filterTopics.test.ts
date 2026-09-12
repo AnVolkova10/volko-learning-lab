@@ -7,6 +7,7 @@ import type { Topic } from "../src/data/types.ts";
 
 const englishTopic: Topic = {
   id: "daily-habits",
+  illustration: "solid-foundations",
   title: "Present Simple",
   description: "Talk about routines.",
   category: "english",

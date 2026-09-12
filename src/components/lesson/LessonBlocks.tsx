@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 type CodeExampleProps = {
   code: string;
   accessibleLabel: string;
@@ -64,19 +66,28 @@ export function Takeaway({ text }: { text: string }) {
   );
 }
 
-export function Recap({ items }: { items: string[] }) {
+export function Recap({
+  items,
+  children,
+  closingThought,
+}: {
+  items: string[];
+  children?: ReactNode;
+  closingThought?: string;
+}) {
   return (
     <section className="recap" id="recap" tabIndex={-1}>
       <p className="eyebrow">KEEP THE IMPORTANT BITS</p>
       <h2>Your pocket recap.</h2>
+      {children}
       <ul>
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
       <p className="recap-note">
-        Close the note. Explain one idea in your own words. That is where
-        understanding starts.
+        {closingThought ||
+          "Close the note. Explain one idea in your own words. That is where understanding starts."}
       </p>
     </section>
   );

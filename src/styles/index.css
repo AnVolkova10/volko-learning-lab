@@ -12,3 +12,10 @@
 @import "../components/theme/ThemeToggle.css";
 @import "../components/practice/Practice.css";
 @import "../components/header/SiteHeader.css";
+@import "../components/lesson/StudyBlocks.css";
+@import "../components/lesson/Classification.css";
+@import "../components/lesson/Reflection.css";
+@import "../components/library/illustrations/SolidArtwork.css";
+@import "../components/library/illustrations/DelegationArtwork.css";
+
+@import "../components/library/FeaturedCarousel.css";

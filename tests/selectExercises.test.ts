@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { solidExercises } from "../src/data/topics/solid-exercises.ts";
+import { solidExercises } from "../src/data/topics/solid/solid-exercises.ts";
 import { selectExercises } from "../src/lib/selectExercises.ts";
 
 test("each session selects one variant per concept and kind without mutating the bank", () => {

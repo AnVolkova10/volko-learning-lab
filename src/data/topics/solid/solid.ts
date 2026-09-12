@@ -1,8 +1,9 @@
 import { solidExercises } from "./solid-exercises.ts";
-import type { Topic } from "../types.ts";
+import type { Topic } from "../../types.ts";
 
 export const solid: Topic = {
   id: "solid",
+  illustration: "solid-foundations",
   title: "The Five Principles of SOLID",
   description:
     "Five thoughtful habits for writing code that is easier to understand, change, and grow. Small TypeScript examples, everyday analogies, and a little practice.",

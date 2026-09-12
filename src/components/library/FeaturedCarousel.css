@@ -1,0 +1,36 @@
+/* Overlapping grid cells reserve the tallest card's space at every width. */
+.featured-carousel {
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.featured-slide {
+  grid-area: 1 / 1;
+  min-width: 0;
+  display: grid;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(32px);
+  transition:
+    opacity 650ms ease,
+    transform 650ms ease,
+    visibility 650ms;
+  pointer-events: none;
+}
+
+.featured-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  pointer-events: auto;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-slide {
+    transform: none;
+    transition: none;
+  }
+}

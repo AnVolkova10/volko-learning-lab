@@ -1,3 +1,5 @@
+import type { ReflectionData, StudyBlock } from "./study-blocks.ts";
+
 export type Category = {
   id: string;
   label: string;
@@ -16,6 +18,7 @@ export type TopicSection = {
   better?: string;
   afterCode?: string;
   takeaway?: string;
+  blocks?: StudyBlock[];
 };
 
 export type Exercise = {
@@ -29,15 +32,21 @@ export type Exercise = {
 
 export type Topic = {
   id: string;
+  illustration: "solid-foundations" | "delegation-map";
   title: string;
   description: string;
   category: string;
   tags: string[];
   readMinutes: number;
+  difficulty?: string;
   introduction: string;
   sections: TopicSection[];
   recap: string[];
   exerciseBank: ExerciseBank;
+  practiceIntroduction?: string;
+  project?: ReflectionData;
+  recapFormula?: string[];
+  closingThought?: string;
   sources?: { title: string; url: string }[];
 };
 
@@ -48,4 +57,10 @@ export type ExerciseConcept = {
   apply: ExerciseVariants;
   identify: ExerciseVariants;
 };
-export type ExerciseBank = [ExerciseConcept, ExerciseConcept, ExerciseConcept, ExerciseConcept, ExerciseConcept];
+export type ExerciseBank = [
+  ExerciseConcept,
+  ExerciseConcept,
+  ExerciseConcept,
+  ExerciseConcept,
+  ExerciseConcept,
+];

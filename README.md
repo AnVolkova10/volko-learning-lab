@@ -33,11 +33,11 @@ Component paths below are relative to `src/components/`. Folders group related w
 | `src/data/types.ts`                    | Contracts for categories, sections, questions, balanced exercise banks, and topics.                                           |
 | `src/data/categories.ts`               | Category IDs, labels, and accent colors.                                                                                      |
 | `src/data/topics.ts`                   | Small catalog of topic imports. The first entry is featured.                                                                  |
-| `src/data/topics/solid.ts`             | SOLID content only. Code strings are displayed, never executed by the app.                                                    |
+| `src/data/topics/solid/solid.ts`             | SOLID content only. Code strings are displayed, never executed by the app.                                                    |
 | `src/lib/filterTopics.ts`              | Pure matching logic: takes data and criteria, returns matches without mutation or browser access.                             |
 | `library/Library.tsx`                  | Composes the introduction, featured topic, and searchable collection.                                                         |
 | `library/LibraryIntro.tsx` + `.css`    | Introduction and decorative paper note.                                                                                       |
-| `library/FeaturedTopic.tsx` + `.css`   | Featured card and decorative letter blocks.                                                                                   |
+| `library/FeaturedTopic.tsx` + `.css`   | Featured card and explicit topic illustration selection.                                                                                   |
 | `library/TopicCollection.tsx` + `.css` | Search/filter logic, collection heading, topic cards, empty state, closing note.                                              |
 | `topic/TopicDetail.tsx`                | Composes a topic's reusable reading and practice blocks.                                                                      |
 | `topic/TableOfContents.tsx`            | Builds links from topic ID and section navigation fields.                                                                     |
@@ -69,7 +69,7 @@ Component paths below are relative to `src/components/`. Folders group related w
 
 ## Data flow
 
-`topics/solid.ts` exports a `Topic`. `data/topics.ts` registers it. `App` finds the requested topic by ID and passes it to `TopicDetail`. The page maps its sections to reusable blocks. `Practice` selects one variant per concept and kind, shuffles those ten questions, and renders one `Exercise` at a time. Checking reveals feedback; Next question advances; Finish practice shows completion. The question key resets local answer state for each new question. A lazy state initializer keeps that draw stable while answering, changing theme, or following section links. Leaving the topic and returning starts a new draw; random draws may repeat questions.
+`topics/solid/solid.ts` exports a `Topic`. `data/topics.ts` registers it. `App` finds the requested topic by ID and passes it to `TopicDetail`. The page maps its sections to reusable blocks. `Practice` selects one variant per concept and kind, shuffles those ten questions, and renders one `Exercise` at a time. Checking reveals feedback; Next question advances; Finish practice shows completion. The question key resets local answer state for each new question. A lazy state initializer keeps that draw stable while answering, changing theme, or following section links. Leaving the topic and returning starts a new draw; random draws may repeat questions.
 
 `TopicCollection` calls `filterTopics`. Every search word must occur somewhere in the title, description, category label, or tags. Case and surrounding spaces are ignored. The category filter applies at the same time. `App` preserves these choices when you visit a lesson and return.
 
@@ -89,20 +89,20 @@ The skip link focuses `main` without changing the hash route. No routing library
 
 ## Add tomorrow's topic
 
-1. Create `src/data/topics/your-topic.ts`, following `solid.ts`. Import `Topic` from `../types.ts` and annotate the exported topic with it.
+1. Create `src/data/topics/your-topic/your-topic.ts`, following `solid.ts`. Import `Topic` from `../../types.ts` and annotate the exported topic with it.
 2. Use a unique lowercase/hyphenated topic ID and a category ID from `categories.ts`.
 3. Each section needs `id`, `title`, `definition`, and `explanation`. The definition is direct wording; comparisons belong in optional `analogy`. Optional fields also include `letter`, before/after code, and takeaway.
-4. Supply an `exerciseBank` with **five concepts**. Each concept has a unique `id`, three `apply` questions and three `identify` questions: 30 total. Each question has a unique `id`, `title`, `prompt`, `options`, and a matching `correctOptionId`. Every option has feedback. Use scenarios different from the lesson examples. Code is optional. Keep the bank in `your-topic-exercises.ts` beside the lesson.
+4. Supply an `exerciseBank` with **five concepts**. Each concept has a unique `id`, three `apply` questions and three `identify` questions: 30 total. Each question has a unique `id`, `title`, `prompt`, `options`, and a matching `correctOptionId`. Every option has feedback. Use scenarios different from the lesson examples. Code is optional. Keep the bank in `your-topic-exercises.ts` inside the same `your-topic/` folder as the lesson. Use this two-file folder structure for every topic.
 5. Import your topic in `src/data/topics.ts` and add it to the array. Put it first to feature it.
 6. Run tests/build and inspect it in the browser.
 
-For example, after creating `topics/present-simple.ts`:
+For example, after creating `topics/present-simple/present-simple.ts`:
 
 ```ts
 // src/data/topics.ts
 import type { Topic } from "./types.ts";
-import { solid } from "./topics/solid.ts";
-import { presentSimple } from "./topics/present-simple.ts";
+import { solid } from "./topics/solid/solid.ts";
+import { presentSimple } from "./topics/present-simple/present-simple.ts";
 
 export const topics: Topic[] = [presentSimple, solid];
 ```
@@ -137,7 +137,7 @@ Only commit content intended for publication: lesson data becomes downloadable J
 
 ## Random practice and mobile layout
 
-- `src/data/topics/solid-exercises.ts`: all 30 authored SOLID questions, grouped by concept and kind. Two small helpers avoid repeating option-object structure and principle labels. Variant suffixes are internal IDs only.
+- `src/data/topics/solid/solid-exercises.ts`: all 30 authored SOLID questions, grouped by concept and kind. Two small helpers avoid repeating option-object structure and principle labels. Variant suffixes are internal IDs only.
 - `src/lib/selectExercises.ts`: choose one of three variants for each concept/kind, then Fisher-Yates shuffle a fresh array. No data mutation, storage, or UI dependencies.
 - `tests/selectExercises.test.ts`: verifies balance, uniqueness, every variant being reachable, shuffling, and no bank mutation using predictable random functions.
 
@@ -150,3 +150,29 @@ Below 760px, lesson prose and answers use 16px text with 1.65 line height, code 
 - `practice/Practice.css` owns progress, the sheet transition, and completion. `Exercise.css` owns the question, answers, and feedback.
 - `shared/LibraryParts.tsx` intentionally keeps two tiny reusable pieces together: Tags and BackToLibrary. Its matching CSS also supplies shared visual primitives (buttons, badges, links, shell). A stylesheet need not imply one React component per selector.
 - Animation uses CSS only, with no motion library. Reduced-motion preferences turn it off. Section links leave space for the sticky header; Next question returns focus to the question region.
+
+## Visual topic: From Prompting to Delegation
+
+`src/data/topics/agent-delegation/agent-delegation.ts` contains seven sections, the final Genosha delegation activity, the recap, and further-reading links. Its separate `agent-delegation-exercises.ts` contains 30 practice questions. The category is AI / Agentic Engineering; the new topic is first in the catalog so it is featured.
+
+Optional fields extend existing topics without changing SOLID's content:
+
+- `TopicSection.blocks` accepts text panels, flow diagrams, comparison/layer cards, and classifications. `src/data/study-blocks.ts` describes these content shapes.
+- `lesson/StudyBlocks.tsx` renders those visual blocks; its matching CSS controls responsive layout.
+- `lesson/Classification.tsx` owns category choices, feedback, and retries. Its CSS styles labeled native selects so the activity works with touch and keyboard.
+- `lesson/Reflection.tsx` provides labeled writing fields and a suggested solution that can be revealed after thinking. Its matching CSS styles the draft and solution.
+- `Topic.project` adds the final reflection and its table-of-contents link. `recapFormula` and `closingThought` customize the recap. `difficulty` and `practiceIntroduction` provide topic-specific labels.
+
+Drafts and classification choices stay in the current page only. There is no AI API, grading service, database, or saved personal answer data. Revealing the suggestion preserves the draft; leaving the topic or reloading clears it. Tests cover the activity data, the balanced draw, and rendered markup; browser checks cover actual interactions.
+
+### A unique illustration for each topic
+
+Create a dedicated component and matching CSS in `src/components/library/illustrations/`. Add its identifier to `Topic.illustration` in `src/data/types.ts`, register the component in `FeaturedTopic.tsx`, and import its stylesheet in `src/styles/index.css`. Set that identifier in the topic data. SOLID owns its foundation blocks; delegation owns its mission map. There is no generic illustration fallback.
+
+### Topic folders and reusable reflection
+
+Each topic owns a folder containing its lesson and exercise bank. There are no extra index files: imports point directly to the named lesson file. `Reflection.tsx` uses topic-neutral response labels; its title, scenario, field labels, prompts, suggested answers, and closing text come from `ReflectionData`. It supports any number of fields without new components. Answers remain temporary and are not automatically graded.
+
+### Featured carousel
+
+FeaturedCarousel.tsx and its matching CSS rotate the latest topic plus up to four randomly selected older topics every five seconds. Selection stays stable during a visit. selectFeaturedTopics.ts owns the selection rule and has a focused test for small and larger catalogs. FeaturedTopic remains the reusable card. Hover and keyboard focus pause rotation; inactive slides are inert. The grid reserves the tallest card's height, and reduced-motion preferences remove transitions. No navigation controls or new dependencies were added.

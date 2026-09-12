@@ -55,6 +55,23 @@ test("the reading page renders five definitions and one active question, includi
     assert.equal((nonCodeHtml.match(/<pre/g) || []).length, 0);
     assert.equal((nonCodeHtml.match(/class="exercise-card"/g) || []).length, 1);
     assert.ok(nonCodeHtml.includes("Daily habits"));
+
+    const delegation = topics.find((topic) => topic.id === "agent-delegation")!;
+    const delegationHtml = renderToStaticMarkup(
+      createElement(TopicDetail, { topic: delegation }),
+    );
+    assert.equal(
+      (delegationHtml.match(/class="classification"/g) || []).length,
+      5,
+    );
+    assert.equal((delegationHtml.match(/<textarea/g) || []).length, 8);
+    assert.equal(
+      (delegationHtml.match(/class="exercise-card"/g) || []).length,
+      1,
+    );
+    assert.ok(delegationHtml.includes('id="project"'));
+    assert.ok(delegationHtml.includes('hidden="" class="reflection-solution"'));
+    assert.ok(delegationHtml.includes("GOOD AGENT DELEGATION"));
   } finally {
     await server.close();
   }

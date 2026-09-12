@@ -11,6 +11,8 @@ import {
 } from "../lesson/LessonBlocks";
 import { BackToLibrary, Tags } from "../shared/LibraryParts";
 import { TableOfContents } from "./TableOfContents";
+import { StudyBlocks, FlowDiagram } from "../lesson/StudyBlocks";
+import { Reflection } from "../lesson/Reflection";
 
 export function TopicDetail({ topic }: { topic: Topic }) {
   const category = categories.find((item) => item.id === topic.category);
@@ -27,6 +29,7 @@ export function TopicDetail({ topic }: { topic: Topic }) {
             {category?.label}
           </span>
           <span>{topic.readMinutes} min read</span>
+          {topic.difficulty && <span>{topic.difficulty}</span>}
           <span>A NOTE WORTH KEEPING</span>
         </div>
         <h1 tabIndex={-1}>{topic.title}</h1>
@@ -34,7 +37,11 @@ export function TopicDetail({ topic }: { topic: Topic }) {
         <Tags tags={topic.tags} />
       </header>
       <div className="lesson-layout">
-        <TableOfContents topicId={topic.id} sections={topic.sections} />
+        <TableOfContents
+          topicId={topic.id}
+          sections={topic.sections}
+          hasProject={Boolean(topic.project)}
+        />
         <div className="lesson-content">
           <section id="introduction" tabIndex={-1} className="lesson-intro">
             <p className="eyebrow">BEFORE WE BEGIN</p>
@@ -93,11 +100,31 @@ export function TopicDetail({ topic }: { topic: Topic }) {
                   accessibleLabel={`${section.title}: improved example`}
                 />
               )}
+              {section.blocks && <StudyBlocks blocks={section.blocks} />}
               {section.takeaway && <Takeaway text={section.takeaway} />}
             </section>
           ))}
-          <Practice key={topic.id} bank={topic.exerciseBank} />
-          <Recap items={topic.recap} />
+          <Practice
+            key={topic.id}
+            bank={topic.exerciseBank}
+            introduction={topic.practiceIntroduction}
+          />
+          {topic.project && (
+            <section id="project" tabIndex={-1} className="principle-section">
+              <p className="eyebrow">YOUR TURN TO DIRECT</p>
+              <h2>Final practical exercise</h2>
+              <Reflection activity={topic.project} />
+            </section>
+          )}
+          <Recap items={topic.recap} closingThought={topic.closingThought}>
+            {topic.recapFormula && (
+              <FlowDiagram
+                title="GOOD AGENT DELEGATION"
+                steps={topic.recapFormula}
+                connector="plus"
+              />
+            )}
+          </Recap>
           {topic.sources && (
             <details className="sources">
               <summary>A little further reading</summary>

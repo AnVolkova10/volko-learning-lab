@@ -9,6 +9,11 @@ test("topic and section IDs form unique, valid navigation targets", () => {
     new Set(categories.map((category) => category.id)).size,
     categories.length,
   );
+  assert.equal(
+    new Set(topics.map((topic) => topic.illustration)).size,
+    topics.length,
+    "Each topic needs its own illustration",
+  );
   for (const topic of topics) {
     assert.match(topic.id, /^[a-z0-9-]+$/);
     assert.ok(categories.some((category) => category.id === topic.category));
@@ -16,6 +21,7 @@ test("topic and section IDs form unique, valid navigation targets", () => {
       "introduction",
       "practice",
       "recap",
+      ...(topic.project ? ["project"] : []),
       ...topic.sections.map((section) => section.id),
     ];
     assert.equal(new Set(ids).size, ids.length);
@@ -32,17 +38,17 @@ test("topic and section IDs form unique, valid navigation targets", () => {
 
 test("every topic has thirty independently identified questions with valid answers", () => {
   for (const topic of topics) {
-    const exercises = topic.exerciseBank.flatMap(concept => [...concept.apply, ...concept.identify]);
+    const exercises = topic.exerciseBank.flatMap((concept) => [
+      ...concept.apply,
+      ...concept.identify,
+    ]);
     assert.equal(topic.exerciseBank.length, 5);
     for (const concept of topic.exerciseBank) {
       assert.equal(concept.apply.length, 3);
       assert.equal(concept.identify.length, 3);
     }
     assert.equal(exercises.length, 30);
-    assert.equal(
-      new Set(exercises.map((exercise) => exercise.id)).size,
-      30,
-    );
+    assert.equal(new Set(exercises.map((exercise) => exercise.id)).size, 30);
     for (const exercise of exercises) {
       assert.ok(exercise.title.trim());
       assert.ok(exercise.prompt.trim());
