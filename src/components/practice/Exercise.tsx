@@ -1,21 +1,26 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import type { Exercise as ExerciseData } from "../../data/types";
 import { CodeExample } from "../lesson/LessonBlocks";
+
+export type ExerciseAnswer = { selected: string; submitted: boolean };
 
 export function Exercise({
   exercise,
   questionNumber,
   questionCount,
   onNext,
+  state,
+  onAnswerChange,
 }: {
   exercise: ExerciseData;
   questionNumber: number;
   questionCount: number;
   onNext: () => void;
+  state: ExerciseAnswer;
+  onAnswerChange: (answer: ExerciseAnswer) => void;
 }) {
   const firstAnswer = useRef<HTMLInputElement>(null);
-  const [selected, setSelected] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const { selected, submitted } = state;
   const answer = exercise.options.find((option) => option.id === selected);
   const correct = selected === exercise.correctOptionId;
 
@@ -35,7 +40,7 @@ export function Exercise({
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          if (selected) setSubmitted(true);
+          if (selected) onAnswerChange({ selected, submitted: true });
         }}
       >
         <fieldset>
@@ -53,8 +58,7 @@ export function Exercise({
                   value={option.id}
                   checked={selected === option.id}
                   onChange={() => {
-                    setSelected(option.id);
-                    setSubmitted(false);
+                    onAnswerChange({ selected: option.id, submitted: false });
                   }}
                 />
                 <span>{option.label}</span>
@@ -78,8 +82,7 @@ export function Exercise({
             <button
               className="text-link"
               onClick={() => {
-                setSelected("");
-                setSubmitted(false);
+                onAnswerChange({ selected: "", submitted: false });
                 firstAnswer.current?.focus();
               }}
             >

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { ExerciseBank } from "../../data/types";
 import { selectExercises } from "../../lib/selectExercises";
-import { Exercise } from "./Exercise";
+import { flushSync } from "react-dom";
+import { Exercise, type ExerciseAnswer } from "./Exercise";
 
 export function Practice({
   bank,
@@ -13,41 +14,70 @@ export function Practice({
   const [exercises] = useState(() => selectExercises(bank));
   const [index, setIndex] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [answers, setAnswers] = useState<Record<string, ExerciseAnswer>>({});
   const page = useRef<HTMLDivElement>(null);
   const turn = useRef<Animation | null>(null);
   const [turning, setTurning] = useState(false);
 
   useEffect(() => () => turn.current?.cancel(), []);
 
-  async function advance() {
-    const sheet = page.current;
-    if (!sheet || turn.current) return;
-    sheet.focus({ preventScroll: true });
-    sheet.scrollIntoView({ block: "start", behavior: "instant" });
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setTurning(true);
-      // Turn the old sheet away before mounting the next question.
-      turn.current = sheet.animate(
-        [
-          { transform: "perspective(1200px) rotateY(0deg)", opacity: 1 },
-          {
-            transform:
-              "perspective(1200px) translateX(-12%) rotateY(-65deg) scale(.94)",
-            opacity: 0,
-          },
-        ],
-        { duration: 320, easing: "cubic-bezier(.55, .05, .8, .45)" },
-      );
-      await turn.current.finished.catch(() => {});
-      turn.current = null;
-      if (!sheet.isConnected) return;
-      setTurning(false);
+  async function navigate(target: number) {
+    const card = page.current;
+    if (!card || turn.current || turning) return;
+    const direction = target < index || finished ? -1 : 1;
+    card.focus({ preventScroll: true });
+    card.scrollIntoView({ block: "start", behavior: "instant" });
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const showTarget = () => {
+      setFinished(target === exercises.length);
+      setIndex(Math.min(target, exercises.length - 1));
+    };
+    if (reduced) {
+      showTarget();
+      return;
     }
-    if (index === exercises.length - 1) setFinished(true);
-    else setIndex((current) => current + 1);
-    // Keep the new sheet in view, including when the previous answer was long.
-    page.current?.focus({ preventScroll: true });
-    page.current?.scrollIntoView({ block: "start", behavior: "instant" });
+    setTurning(true);
+    try {
+      // Swap content edge-on, then reveal the reverse face of the card.
+      turn.current = card.animate(
+        [
+          { transform: "rotateY(0deg)" },
+          { transform: `rotateY(${direction * -90}deg)` },
+        ],
+        {
+          duration: 260,
+          easing: "cubic-bezier(.55, 0, 1, .45)",
+          fill: "forwards",
+        },
+      );
+      await turn.current.finished;
+      if (!card.isConnected) return;
+      flushSync(showTarget);
+      turn.current.cancel();
+      turn.current = card.animate(
+        [
+          { transform: `rotateY(${direction * 90}deg)` },
+          { transform: "rotateY(0deg)" },
+        ],
+        {
+          duration: 340,
+          easing: "cubic-bezier(0, .55, .45, 1)",
+          fill: "forwards",
+        },
+      );
+      await turn.current.finished;
+    } catch {
+      // Unmounting cancels the animation when leaving the topic.
+    } finally {
+      turn.current?.cancel();
+      turn.current = null;
+      if (card.isConnected) {
+        setTurning(false);
+        card.focus({ preventScroll: true });
+      }
+    }
   }
   return (
     <section id="practice" tabIndex={-1} className="practice-section">
@@ -64,45 +94,66 @@ export function Practice({
             : `Question ${index + 1} of ${exercises.length}`}
         </span>
         <progress
-          value={finished ? exercises.length : index}
+          value={
+            Object.values(answers).filter((answer) => answer.submitted).length
+          }
           max={exercises.length}
           aria-label="Questions completed"
         />
       </div>
-      <div
-        className="practice-pages"
-        ref={page}
-        tabIndex={-1}
-        aria-label="Current practice question"
-        inert={turning}
-      >
-        {finished ? (
-          <div className="practice-complete">
-            <p className="eyebrow">ONE MORE PAGE LEARNED</p>
-            <h3>Ten questions explored.</h3>
-            <p>
-              Take a moment to explain one idea in your own words. Your recap is
-              just below.
-            </p>
-            <button
-              className="button primary"
-              onClick={() => {
-                setIndex(0);
-                setFinished(false);
-              }}
-            >
-              Review these questions
-            </button>
+      <div className="practice-stage">
+        <div
+          className="practice-pages"
+          ref={page}
+          tabIndex={-1}
+          aria-label="Current practice question"
+          aria-busy={turning}
+        >
+          <div inert={turning}>
+            {finished ? (
+              <div className="practice-complete">
+                <p className="eyebrow">PRACTICE COMPLETE</p>
+                <h3>Ten questions explored.</h3>
+                <p>
+                  Take a moment to explain one idea in your own words. Your
+                  recap is just below.
+                </p>
+                <button className="button primary" onClick={() => navigate(0)}>
+                  Review these questions
+                </button>
+              </div>
+            ) : (
+              <Exercise
+                key={exercises[index].id}
+                exercise={exercises[index]}
+                questionNumber={index + 1}
+                questionCount={exercises.length}
+                state={
+                  answers[exercises[index].id] || {
+                    selected: "",
+                    submitted: false,
+                  }
+                }
+                onAnswerChange={(answer) =>
+                  setAnswers((current) => ({
+                    ...current,
+                    [exercises[index].id]: answer,
+                  }))
+                }
+                onNext={() => navigate(index + 1)}
+              />
+            )}
           </div>
-        ) : (
-          <Exercise
-            key={exercises[index].id}
-            exercise={exercises[index]}
-            questionNumber={index + 1}
-            questionCount={exercises.length}
-            onNext={advance}
-          />
-        )}
+        </div>
+      </div>
+      <div className="practice-navigation">
+        <button
+          className="text-link"
+          disabled={turning || (!finished && index === 0)}
+          onClick={() => navigate(finished ? exercises.length - 1 : index - 1)}
+        >
+          <span aria-hidden="true">{"\u2190"}</span> Previous question
+        </button>
       </div>
     </section>
   );

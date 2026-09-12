@@ -2,7 +2,7 @@
 
 A personal learning library built with React, TypeScript, Vite, and plain CSS. SOLID is the first topic: five plain definitions, detailed explanations, analogies, before/after examples, and a bank of 30 practice questions (10 per visit).
 
-One file per topic. No backend, accounts, database, or editor. The browser saves only the light/dark preference; the current answer lasts until you advance to the next question. Reviewing starts the same selection again with blank answers.
+One file per topic. No backend, accounts, database, or editor. The browser saves only the light/dark preference; practice answers remain available when moving backward or reviewing during the current visit. Leaving or reloading clears them.
 
 ## Run locally
 
@@ -69,7 +69,7 @@ Component paths below are relative to `src/components/`. Folders group related w
 
 ## Data flow
 
-`topics/solid/solid.ts` exports a `Topic`. `data/topics.ts` registers it. `App` finds the requested topic by ID and passes it to `TopicDetail`. The page maps its sections to reusable blocks. `Practice` selects one variant per concept and kind, shuffles those ten questions, and renders one `Exercise` at a time. Checking reveals feedback; Next question advances; Finish practice shows completion. The question key resets local answer state for each new question. A lazy state initializer keeps that draw stable while answering, changing theme, or following section links. Leaving the topic and returning starts a new draw; random draws may repeat questions.
+`topics/solid/solid.ts` exports a `Topic`. `data/topics.ts` registers it. `App` finds the requested topic by ID and passes it to `TopicDetail`. The page maps its sections to reusable blocks. `Practice` selects one variant per concept and kind, shuffles those ten questions, and renders one `Exercise` at a time. Checking reveals feedback; Next question advances; Finish practice shows completion. Practice owns answer state by question ID, so Previous question and review preserve choices and feedback. A lazy state initializer keeps that draw stable while answering, changing theme, or following section links. Leaving the topic and returning starts a new draw; random draws may repeat questions.
 
 `TopicCollection` calls `filterTopics`. Every search word must occur somewhere in the title, description, category label, or tags. Case and surrounding spaces are ignored. The category filter applies at the same time. `App` preserves these choices when you visit a lesson and return.
 
@@ -147,7 +147,7 @@ Below 760px, lesson prose and answers use 16px text with 1.65 line height, code 
 
 - `library/Library.tsx` is composition only, so it needs no CSS of its own. `LibraryIntro`, `FeaturedTopic`, and `TopicCollection` each own a matching stylesheet. Collection cards remain inside their collection because there is no second use requiring another public component yet.
 - `header/SiteHeader.tsx` and `SiteHeader.css` own the sticky header and its scroll listener. Separate expand/collapse thresholds prevent flickering near the transition. The listener is removed when unmounted.
-- `practice/Practice.css` owns progress, the sheet transition, and completion. `Exercise.css` owns the question, answers, and feedback.
+- `practice/Practice.css` owns progress, the centered card flip, and completion. `Exercise.css` owns the question, answers, and feedback.
 - `shared/LibraryParts.tsx` intentionally keeps two tiny reusable pieces together: Tags and BackToLibrary. Its matching CSS also supplies shared visual primitives (buttons, badges, links, shell). A stylesheet need not imply one React component per selector.
 - Animation uses CSS only, with no motion library. Reduced-motion preferences turn it off. Section links leave space for the sticky header; Next question returns focus to the question region.
 
@@ -176,3 +176,5 @@ Each topic owns a folder containing its lesson and exercise bank. There are no e
 ### Featured carousel
 
 FeaturedCarousel.tsx and its matching CSS rotate the latest topic plus up to four randomly selected older topics every five seconds. Selection stays stable during a visit. selectFeaturedTopics.ts owns the selection rule and has a focused test for small and larger catalogs. FeaturedTopic remains the reusable card. Hover and keyboard focus pause rotation; inactive slides are inert. The grid reserves the tallest card's height, and reduced-motion preferences remove transitions. No navigation controls or new dependencies were added.
+
+Practice now owns selected/submitted answers per question. Exercise receives its answer and an update callback. A centered two-phase card flip swaps content edge-on; backward navigation reverses the rotation. Reduced-motion users switch immediately. No new files or dependencies were needed.
