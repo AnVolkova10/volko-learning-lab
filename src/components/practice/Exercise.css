@@ -38,7 +38,8 @@ legend {
   padding: 13px 15px;
   border: 1px solid #e0d6e9;
   background: #fbf9fe;
-  font-size: 12px;
+  font-size: 16px;
+  line-height: 1.75;
   color: #7c6a8b;
   border-radius: 6px;
 }

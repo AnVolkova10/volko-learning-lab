@@ -1,10 +1,4 @@
 /* Reusable reading blocks: definition, analogy, code, takeaway and recap. */
-.recap li {
-  font-size: 14px;
-  line-height: 1.85;
-  color: #766d77;
-}
-
 .analogy {
   display: flex;
   gap: 15px;
@@ -140,7 +134,8 @@ code {
 .recap li {
   padding-left: 7px;
   margin-bottom: 13px;
-  font-size: 13px;
+  font-size: 16px;
+  line-height: 1.75;
   color: #59684e;
 }
 

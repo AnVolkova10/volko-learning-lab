@@ -55,8 +55,8 @@
 .reflection-solution dd {
   margin: 8px 0 0;
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.85;
+  font-size: 16px;
+  line-height: 1.75;
 }
 @media (max-width: 760px) {
   .reflection {
