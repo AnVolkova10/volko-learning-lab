@@ -4,7 +4,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 import { topics } from "../src/data/topics.ts";
-import type { Topic } from "../src/data/types.ts";
+import type { Topic } from "../src/types/topic.ts";
 
 // This checks generated markup, not browser clicks or visual layout.
 test("the reading page renders five definitions and one active question, including non-code topics", async () => {
@@ -14,7 +14,7 @@ test("the reading page renders five definitions and one active question, includi
   });
   try {
     const { TopicDetail } = await server.ssrLoadModule(
-      "/src/components/topic/TopicDetail.tsx",
+      "/src/screens/topic/TopicDetail.tsx",
     );
     const solid = topics.find((topic) => topic.id === "solid")!;
     const html = renderToStaticMarkup(

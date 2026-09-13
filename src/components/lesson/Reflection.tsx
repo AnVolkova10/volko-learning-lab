@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import type { ReflectionData } from "../../data/study-blocks";
+import type { ReflectionData } from "../../types/study-blocks";
 
 export function Reflection({ activity }: { activity: ReflectionData }) {
   const id = useId();

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { asyncJavascript } from "../src/data/topics/async-javascript/async-javascript.ts";
-import { selectExercises } from "../src/lib/selectExercises.ts";
+import { selectExercises } from "../src/services/exerciseSelection.ts";
 
 test("async lesson has comparable timelines, valid predictions and balanced practice", () => {
   assert.equal(asyncJavascript.sections.length, 7);

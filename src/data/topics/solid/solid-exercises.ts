@@ -1,4 +1,4 @@
-import type { Exercise, ExerciseBank } from "../../types.ts";
+import type { Exercise, ExerciseBank } from "../../../types/topic.ts";
 
 const principles = [
   ["s", "S — Single Responsibility"],

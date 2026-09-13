@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { topics } from "../../data/topics";
 import { categories } from "../../data/categories";
-import { filterTopics } from "../../lib/filterTopics";
+import { filterTopics } from "./filterTopics";
 import { Tags } from "../shared/LibraryParts";
 
 export type LibraryProps = {

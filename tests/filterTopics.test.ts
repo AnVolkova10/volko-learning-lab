@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { filterTopics } from "../src/lib/filterTopics.ts";
+import { filterTopics } from "../src/components/library/filterTopics.ts";
 import { categories } from "../src/data/categories.ts";
 import { topics } from "../src/data/topics.ts";
-import type { Topic } from "../src/data/types.ts";
+import type { Topic } from "../src/types/topic.ts";
 
 const englishTopic: Topic = {
   id: "daily-habits",

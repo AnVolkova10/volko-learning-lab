@@ -1,4 +1,4 @@
-import type { Topic } from "../../types.ts";
+import type { Topic } from "../../../types/topic.ts";
 import { delegationExercises } from "./agent-delegation-exercises.ts";
 
 export const agentDelegation: Topic = {

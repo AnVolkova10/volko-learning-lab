@@ -2,8 +2,7 @@
 
 Project-specific conventions supplement the global `AGENTS.md`.
 
-This repository predates Angela's canonical Vite structure.
-Preserve the existing architecture; do not reorganize it merely to match the global folder convention.
+Use the existing folder responsibilities below. Create additional canonical folders only when they have a concrete responsibility.
 
 ## Project architecture
 
@@ -13,13 +12,13 @@ Preserve the existing architecture; do not reorganize it merely to match the glo
 - Reusable components must not contain topic-specific wording.
 - Keep component CSS alongside its owner with matching names.
 - Keep tests in `tests/`.
-- `src/lib/` is a historical project convention for existing pure selection/filtering helpers.
-- Preserve current `src/lib/` usage, but do not expand it into a generic miscellaneous folder.
+- Keep library filtering and featured selection beside their consuming components.
+- Keep shared domain policy in `src/services/`; data and services must not depend on UI components.
 - Preserve the current visual identity, mobile behavior, both themes, keyboard accessibility and reduced-motion support.
 
 ## Adding topics
 
-- Start with `src/data/types.ts`, `src/data/study-blocks.ts`, and one relevant existing topic.
+- Start with `src/types/topic.ts`, `src/types/study-blocks.ts`, and one relevant existing topic.
 - Place topic content and exercises in:
 
   `src/data/topics/<slug>/`
@@ -47,13 +46,14 @@ Preserve the existing architecture; do not reorganize it merely to match the glo
 
 ## File map
 
-- `src/data/types.ts` and `src/data/study-blocks.ts` — topic and reusable block contracts.
+- `src/types/topic.ts` and `src/types/study-blocks.ts` — topic and reusable block contracts.
 - `src/data/topics/` — topic content and exercises.
 - `src/components/lesson/` — reusable reading and reflection blocks.
-- `src/components/topic/` — topic-page composition and contents navigation.
+- `src/app/` - root composition, hash navigation and app-level state.
+- `src/screens/` - library and topic views, including screen-owned contents navigation.
 - `src/components/practice/` — practice interaction.
 - `src/components/library/` — catalog, featured UI, carousel and artwork.
-- `src/lib/` — existing filtering/selection helpers.
+- `src/services/exerciseSelection.ts` - shared balanced exercise-selection policy.
 - `src/styles/` — global CSS system.
 
 Preserve these boundaries unless there is a concrete reason to change them.
@@ -66,6 +66,6 @@ Preserve these boundaries unless there is a concrete reason to change them.
 
 ## Documentation
 
-- Consult `README.md` when deeper setup, architecture or file-map context is needed.
+- Use `README.md` for setup, `docs/architecture.md` for architecture and file responsibilities, and `docs/adding-topics.md` for topic authoring.
 - Do not duplicate implementation history or temporary task notes into this file.
 - When introducing a new project-specific structure, explain what problem it solves, where it lives and how future topics can reuse it.

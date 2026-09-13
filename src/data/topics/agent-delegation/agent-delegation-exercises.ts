@@ -1,4 +1,4 @@
-import type { Exercise, ExerciseBank } from "../../types.ts";
+import type { Exercise, ExerciseBank } from "../../../types/topic.ts";
 
 // Alternatives keep their feedback beside the answer. Every scenario is independent
 // of the guided examples, so practice requires applying the idea in a new setting.

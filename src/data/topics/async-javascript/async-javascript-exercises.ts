@@ -1,4 +1,4 @@
-import type { Exercise, ExerciseBank } from "../../types.ts";
+import type { Exercise, ExerciseBank } from "../../../types/topic.ts";
 
 // One local helper avoids repeating option objects and feedback text.
 function question(

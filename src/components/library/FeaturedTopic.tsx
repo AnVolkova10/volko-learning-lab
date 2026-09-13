@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { Topic } from "../../data/types";
+import type { Topic } from "../../types/topic";
 import { categories } from "../../data/categories";
 
 import { SolidArtwork } from "./illustrations/SolidArtwork";

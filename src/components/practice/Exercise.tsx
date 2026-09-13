@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import type { Exercise as ExerciseData } from "../../data/types";
+import type { Exercise as ExerciseData } from "../../types/topic";
 import { CodeExample } from "../lesson/LessonBlocks";
 
 export type ExerciseAnswer = { selected: string; submitted: boolean };

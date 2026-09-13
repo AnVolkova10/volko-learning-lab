@@ -1,5 +1,5 @@
 import { solidExercises } from "./solid-exercises.ts";
-import type { Topic } from "../../types.ts";
+import type { Topic } from "../../../types/topic.ts";
 
 export const solid: Topic = {
   id: "solid",

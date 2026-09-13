@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { topics } from "./data/topics";
-import { Library } from "./components/library/Library";
-import { TopicDetail } from "./components/topic/TopicDetail";
-import { SiteHeader } from "./components/header/SiteHeader";
-import { BackToLibrary } from "./components/shared/LibraryParts";
+import { topics } from "../data/topics";
+import { Library } from "../screens/library/Library";
+import { TopicDetail } from "../screens/topic/TopicDetail";
+import { SiteHeader } from "../components/header/SiteHeader";
+import { BackToLibrary } from "../components/shared/LibraryParts";
 
 function focusPage(hash: string) {
   // "#/topics/solid/srp" -> ["#", "topics", "solid", "srp"].

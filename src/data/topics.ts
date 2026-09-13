@@ -1,4 +1,4 @@
-import type { Topic } from "./types.ts";
+import type { Topic } from "../types/topic.ts";
 import { solid } from "./topics/solid/solid.ts";
 import { agentDelegation } from "./topics/agent-delegation/agent-delegation.ts";
 import { asyncJavascript } from "./topics/async-javascript/async-javascript.ts";

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import type { Topic } from "../../data/types";
-import { selectFeaturedTopics } from "../../lib/selectFeaturedTopics";
+import type { Topic } from "../../types/topic";
+import { selectFeaturedTopics } from "./selectFeaturedTopics";
 import { FeaturedTopic } from "./FeaturedTopic";
 
 export function FeaturedCarousel({ topics }: { topics: Topic[] }) {

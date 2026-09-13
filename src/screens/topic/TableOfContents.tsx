@@ -1,4 +1,4 @@
-import type { TopicSection } from "../../data/types";
+import type { TopicSection } from "../../types/topic";
 
 type TableOfContentsProps = {
   topicId: string;

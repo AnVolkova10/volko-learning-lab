@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { agentDelegation } from "../src/data/topics/agent-delegation/agent-delegation.ts";
-import { selectExercises } from "../src/lib/selectExercises.ts";
+import { selectExercises } from "../src/services/exerciseSelection.ts";
 
 test("the guided topic has seven independently addressable sections and valid classifications", () => {
   assert.equal(agentDelegation.sections.length, 7);

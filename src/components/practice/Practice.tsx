@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import type { ExerciseBank } from "../../data/types";
-import { selectExercises } from "../../lib/selectExercises";
+import type { ExerciseBank } from "../../types/topic";
+import { selectExercises } from "../../services/exerciseSelection";
 import { flushSync } from "react-dom";
 import { Exercise, type ExerciseAnswer } from "./Exercise";
 

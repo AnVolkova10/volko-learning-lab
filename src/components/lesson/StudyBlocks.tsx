@@ -1,4 +1,4 @@
-import type { StudyBlock } from "../../data/study-blocks";
+import type { StudyBlock } from "../../types/study-blocks";
 import { Classification } from "./Classification";
 import { CodeExample } from "./LessonBlocks";
 

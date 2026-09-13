@@ -1,4 +1,4 @@
-import type { Topic } from "../../types.ts";
+import type { Topic } from "../../../types/topic.ts";
 import { asyncExercises } from "./async-javascript-exercises.ts";
 
 export const asyncJavascript: Topic = {

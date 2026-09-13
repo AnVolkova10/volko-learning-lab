@@ -1,4 +1,4 @@
-import type { Topic } from "../data/types.ts";
+import type { Topic } from "../../types/topic.ts";
 
 // Keep the latest first; sample up to four others without changing the catalog.
 export function selectFeaturedTopics(

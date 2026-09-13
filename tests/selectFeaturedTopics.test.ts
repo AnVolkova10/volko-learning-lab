@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { topics } from "../src/data/topics.ts";
-import { selectFeaturedTopics } from "../src/lib/selectFeaturedTopics.ts";
+import { selectFeaturedTopics } from "../src/components/library/selectFeaturedTopics.ts";
 
 test("featured selection handles small catalogs and caps a unique draw at five", () => {
   assert.deepEqual(selectFeaturedTopics([]), []);

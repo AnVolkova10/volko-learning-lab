@@ -1,18 +1,18 @@
 import type { CSSProperties } from "react";
 import { categories } from "../../data/categories";
-import type { Topic } from "../../data/types";
-import { Practice } from "../practice/Practice";
+import type { Topic } from "../../types/topic";
+import { Practice } from "../../components/practice/Practice";
 import {
   Analogy,
   CodeExample,
   Recap,
   Takeaway,
   SimpleDefinition,
-} from "../lesson/LessonBlocks";
-import { BackToLibrary, Tags } from "../shared/LibraryParts";
+} from "../../components/lesson/LessonBlocks";
+import { BackToLibrary, Tags } from "../../components/shared/LibraryParts";
 import { TableOfContents } from "./TableOfContents";
-import { StudyBlocks, FlowDiagram } from "../lesson/StudyBlocks";
-import { Reflection } from "../lesson/Reflection";
+import { StudyBlocks, FlowDiagram } from "../../components/lesson/StudyBlocks";
+import { Reflection } from "../../components/lesson/Reflection";
 
 export function TopicDetail({ topic }: { topic: Topic }) {
   const category = categories.find((item) => item.id === topic.category);

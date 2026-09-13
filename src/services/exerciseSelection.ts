@@ -1,4 +1,4 @@
-import type { ExerciseBank } from "../data/types.ts";
+import type { ExerciseBank } from "../types/topic.ts";
 
 // Pick one alternative per concept and kind, then shuffle without changing the bank.
 // Injecting random makes the selection rules testable without flaky probability tests.

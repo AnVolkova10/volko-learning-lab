@@ -1,12 +1,12 @@
 /* Load general rules first, then feature and reusable-block rules. */
 @import "./base.css";
-@import "../App.css";
+@import "../app/App.css";
 @import "../components/shared/LibraryParts.css";
 @import "../components/library/LibraryIntro.css";
 @import "../components/library/FeaturedTopic.css";
 @import "../components/library/TopicCollection.css";
-@import "../components/topic/TopicDetail.css";
-@import "../components/topic/TableOfContents.css";
+@import "../screens/topic/TopicDetail.css";
+@import "../screens/topic/TableOfContents.css";
 @import "../components/lesson/LessonBlocks.css";
 @import "../components/practice/Exercise.css";
 @import "../components/theme/ThemeToggle.css";

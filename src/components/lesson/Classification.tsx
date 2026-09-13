@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import type { ClassificationData } from "../../data/study-blocks";
+import type { ClassificationData } from "../../types/study-blocks";
 
 export function Classification({ activity }: { activity: ClassificationData }) {
   const id = useId();
