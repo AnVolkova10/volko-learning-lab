@@ -1,0 +1,111 @@
+.async-art {
+  --clock-paper: #fffaf2;
+  --clock-ink: #735291;
+  --clock-sage: #7d9872;
+  --clock-note: #e2d2ee;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 18px 32px;
+}
+.async-art svg {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+}
+.async-art p {
+  font: italic 15px/1.6 var(--serif);
+  color: var(--clock-ink);
+  margin: 0;
+}
+.async-orbit {
+  stroke: var(--clock-ink);
+  opacity: 0.16;
+  stroke-dasharray: 3 7;
+}
+.async-shadow {
+  fill: var(--clock-ink);
+  opacity: 0.12;
+}
+.async-clock,
+.async-paper {
+  fill: var(--clock-paper);
+}
+.async-ring {
+  stroke: var(--clock-ink);
+  opacity: 0.25;
+}
+.async-ticks,
+.async-hands {
+  stroke: var(--clock-ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.async-hub,
+.async-start {
+  fill: var(--clock-ink);
+}
+.async-track {
+  stroke: var(--clock-ink);
+  opacity: 0.12;
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+.async-first {
+  stroke: var(--clock-ink);
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+.async-second {
+  stroke: var(--clock-sage);
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+.async-finish {
+  stroke: var(--clock-paper);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.async-note {
+  fill: var(--clock-note);
+}
+.async-spark {
+  stroke: var(--clock-ink);
+  opacity: 0.45;
+  stroke-width: 1.5;
+}
+[data-theme="dark"] .async-art {
+  --clock-paper: #392e46;
+  --clock-ink: #ceb3ec;
+  --clock-sage: #b8cfa7;
+  --clock-note: #564267;
+}
+@media (max-width: 760px) {
+  .async-art {
+    padding: 8px 12px 28px;
+  }
+  .async-art svg {
+    max-width: 390px;
+  }
+}
+
+/* The minute hand rotates around its own translated clock-center origin. */
+.async-minute-hand {
+  transform-origin: 0 0;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .featured:hover .async-minute-hand,
+  .featured:focus-within .async-minute-hand {
+    animation: async-minute-turn 2.8s linear infinite;
+  }
+}
+@keyframes async-minute-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}

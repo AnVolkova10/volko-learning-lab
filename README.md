@@ -155,13 +155,13 @@ Below 760px, lesson prose and answers use 16px text with 1.65 line height, code 
 
 `src/data/topics/agent-delegation/agent-delegation.ts` contains seven sections, the final Genosha delegation activity, the recap, and further-reading links. Its separate `agent-delegation-exercises.ts` contains 30 practice questions. The category is AI / Agentic Engineering; the new topic is first in the catalog so it is featured.
 
-Optional fields extend existing topics without changing SOLID's content:
+Optional visual fields extend the existing lesson formats:
 
 - `TopicSection.blocks` accepts text panels, flow diagrams, comparison/layer cards, and classifications. `src/data/study-blocks.ts` describes these content shapes.
 - `lesson/StudyBlocks.tsx` renders those visual blocks; its matching CSS controls responsive layout.
 - `lesson/Classification.tsx` owns category choices, feedback, and retries. Its CSS styles labeled native selects so the activity works with touch and keyboard.
 - `lesson/Reflection.tsx` provides labeled writing fields and a suggested solution that can be revealed after thinking. Its matching CSS styles the draft and solution.
-- `Topic.project` adds the final reflection and its table-of-contents link. `recapFormula` and `closingThought` customize the recap. `difficulty` and `practiceIntroduction` provide topic-specific labels.
+- `Topic.project` is required for every published lesson and adds the final reflection and its table-of-contents link. `recapFormula` and `closingThought` customize the recap. `difficulty` and `practiceIntroduction` provide topic-specific labels.
 
 Drafts and classification choices stay in the current page only. There is no AI API, grading service, database, or saved personal answer data. Revealing the suggestion preserves the draft; leaving the topic or reloading clears it. Tests cover the activity data, the balanced draw, and rendered markup; browser checks cover actual interactions.
 
@@ -178,3 +178,13 @@ Each topic owns a folder containing its lesson and exercise bank. There are no e
 FeaturedCarousel.tsx and its matching CSS rotate the latest topic plus up to four randomly selected older topics every five seconds. Selection stays stable during a visit. selectFeaturedTopics.ts owns the selection rule and has a focused test for small and larger catalogs. FeaturedTopic remains the reusable card. Hover and keyboard focus pause rotation; inactive slides are inert. The grid reserves the tallest card's height, and reduced-motion preferences remove transitions. No navigation controls or new dependencies were added.
 
 Practice now owns selected/submitted answers per question. Exercise receives its answer and an update callback. A centered two-phase card flip swaps content edge-on; backward navigation reverses the rotation. Reduced-motion users switch immediately. No new files or dependencies were needed.
+
+## Async JavaScript and final practice
+
+The third topic lives in `src/data/topics/async-javascript/`, with separate lesson and exercise files. `StudyBlock` now supports labeled code and proportional timelines. `Topic.recapBlocks` optionally reuses study blocks in the recap. Every topic must supply `project`: a short application activity using Reflection, sized to the topic. Table-of-contents section numbers are derived from array order; section navigation scrolls smoothly unless reduced motion is preferred. Each artwork owns a subtle hover movement in its matching CSS.
+
+See [CAMBIOS-ASYNC-JAVASCRIPT.md](CAMBIOS-ASYNC-JAVASCRIPT.md) for the full Spanish explanation, file map, sources, and decisions.
+
+### Accepted artwork motion for future topics
+
+Each topic gets a unique illustration and a meaning-based loop, activated by hovering its featured card (or focusing the card link). Animate relevant parts, not just the entire drawing: SOLID's pillars lift in a staggered wave, Async's clock hand turns, and Delegation's pulses follow its routes toward review. Keep the movement gentle, continuous, and roughly 3 seconds per cycle, with no layout shifts. Keep the idle illustration static and complete. Use the artwork's own CSS, prefer transforms or SVG stroke animation, and disable motion with prefers-reduced-motion. Do not add animation libraries for effects that CSS already handles. This is the accepted direction for new topics; the exact choreography should fit each subject.

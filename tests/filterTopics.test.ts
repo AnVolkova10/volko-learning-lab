@@ -17,6 +17,18 @@ const englishTopic: Topic = {
   sections: [],
   recap: [],
   exerciseBank: topics[0].exerciseBank,
+  project: {
+    title: "Describe a routine",
+    scenario: "Write about one daily habit.",
+    fields: [
+      {
+        label: "Habit",
+        prompt: "What do you do every day?",
+        suggestion: "I read every morning.",
+      },
+    ],
+    closing: "Check the verb form.",
+  },
 };
 const collection = [...topics, englishTopic];
 

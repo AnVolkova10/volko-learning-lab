@@ -116,3 +116,39 @@
     font-size: 16px;
   }
 }
+
+/* Timeline text carries the same information as the proportional bars. */
+.study-timeline {
+  margin: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.study-timeline figcaption {
+  font-weight: 650;
+  color: var(--violet);
+}
+.timeline-row {
+  margin-block: 18px;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.timeline-track {
+  margin-top: 8px;
+  background: var(--accent-surface);
+  border-radius: 6px;
+  height: 14px;
+  overflow: hidden;
+}
+.timeline-track > span {
+  display: block;
+  height: 100%;
+  background: var(--violet);
+  border-radius: 6px;
+}
+@media (max-width: 760px) {
+  .study-timeline {
+    padding: 18px 16px;
+  }
+}

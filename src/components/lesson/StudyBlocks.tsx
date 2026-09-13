@@ -1,5 +1,6 @@
 import type { StudyBlock } from "../../data/study-blocks";
 import { Classification } from "./Classification";
+import { CodeExample } from "./LessonBlocks";
 
 export function FlowDiagram({
   title,
@@ -35,6 +36,40 @@ export function StudyBlocks({ blocks }: { blocks: StudyBlock[] }) {
     <div className="study-blocks">
       {blocks.map((block, index) => {
         switch (block.kind) {
+          case "code":
+            return (
+              <CodeExample
+                key={index}
+                code={block.code}
+                label={block.title}
+                accessibleLabel={block.title}
+              />
+            );
+          case "timeline":
+            return (
+              <figure className="study-timeline" key={index}>
+                <figcaption>{block.title}</figcaption>
+                <p className="timeline-scale">
+                  Same scale: 0–{block.totalSeconds} seconds
+                </p>
+                {block.rows.map((row) => (
+                  <div className="timeline-row" key={row.label}>
+                    <span>
+                      {row.label} · {row.start}–{row.start + row.duration}s
+                    </span>
+                    <div className="timeline-track" aria-hidden="true">
+                      <span
+                        style={{
+                          marginLeft: `${(row.start / block.totalSeconds) * 100}%`,
+                          width: `${(row.duration / block.totalSeconds) * 100}%`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+                <p>{block.caption}</p>
+              </figure>
+            );
           case "text":
             return (
               <div className="study-text" key={index}>

@@ -15,6 +15,14 @@ test("topic and section IDs form unique, valid navigation targets", () => {
     "Each topic needs its own illustration",
   );
   for (const topic of topics) {
+    assert.ok(topic.project.title.trim() && topic.project.scenario.trim());
+    assert.ok(topic.project.fields.length > 0);
+    assert.ok(
+      topic.project.fields.every(
+        (field) =>
+          field.label.trim() && field.prompt.trim() && field.suggestion.trim(),
+      ),
+    );
     assert.match(topic.id, /^[a-z0-9-]+$/);
     assert.ok(categories.some((category) => category.id === topic.category));
     const ids = [

@@ -2,7 +2,7 @@ import type { TopicSection } from "../../data/types";
 
 type TableOfContentsProps = {
   topicId: string;
-  sections: Pick<TopicSection, "id" | "title" | "letter">[];
+  sections: Pick<TopicSection, "id" | "title">[];
   hasProject?: boolean;
 };
 
@@ -16,9 +16,9 @@ export function TableOfContents({
       <nav aria-label="On this page">
         <p className="eyebrow">IN THIS NOTE</p>
         <a href={`#/topics/${topicId}/introduction`}>Before we begin</a>
-        {sections.map((section) => (
+        {sections.map((section, index) => (
           <a href={`#/topics/${topicId}/${section.id}`} key={section.id}>
-            <span>{section.letter || "·"}</span>
+            <span>{String(index + 1).padStart(2, "0")}</span>
             {section.title}
           </a>
         ))}

@@ -14,6 +14,14 @@ export type ReflectionData = {
 };
 
 export type StudyBlock =
+  | { kind: "code"; title: string; code: string }
+  | {
+      kind: "timeline";
+      title: string;
+      totalSeconds: number;
+      rows: { label: string; start: number; duration: number }[];
+      caption: string;
+    }
   | { kind: "text"; title: string; text: string }
   | {
       kind: "flow";

@@ -1,6 +1,11 @@
 import type { Category } from "./types.ts";
 
 export const categories: Category[] = [
+  {
+    id: "javascript-frontend",
+    label: "JavaScript / Frontend",
+    color: "#997229",
+  },
   { id: "programming", label: "Programming", color: "#7453bf" },
   {
     id: "agentic-engineering",

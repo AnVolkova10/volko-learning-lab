@@ -111,12 +111,13 @@ export function TopicDetail({ topic }: { topic: Topic }) {
           />
           {topic.project && (
             <section id="project" tabIndex={-1} className="principle-section">
-              <p className="eyebrow">YOUR TURN TO DIRECT</p>
+              <p className="eyebrow">YOUR TURN TO PRACTICE</p>
               <h2>Final practical exercise</h2>
               <Reflection activity={topic.project} />
             </section>
           )}
           <Recap items={topic.recap} closingThought={topic.closingThought}>
+            {topic.recapBlocks && <StudyBlocks blocks={topic.recapBlocks} />}
             {topic.recapFormula && (
               <FlowDiagram
                 title="GOOD AGENT DELEGATION"

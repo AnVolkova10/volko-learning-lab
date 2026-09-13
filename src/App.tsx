@@ -13,8 +13,15 @@ function focusPage(hash: string) {
     ? document.getElementById(sectionId)
     : document.querySelector("h1");
   destination?.focus({ preventScroll: true });
-  if (sectionId && destination) destination.scrollIntoView({ block: "start" });
-  else window.scrollTo({ top: 0, behavior: "instant" });
+  if (sectionId && destination) {
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    destination.scrollIntoView({
+      block: "start",
+      behavior: reducedMotion ? "instant" : "smooth",
+    });
+  } else window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 export default function App() {

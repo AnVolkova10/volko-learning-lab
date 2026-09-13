@@ -57,8 +57,24 @@
   background: linear-gradient(140deg, #7d5ca5, #59377d);
 }
 
-.featured:hover .solid-blocks > span {
-  transform: translateY(calc(var(--block-index) * -2px));
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .featured:hover .solid-blocks > span,
+  .featured:focus-within .solid-blocks > span {
+    animation: solid-foundation-wave 2.8s ease-in-out infinite;
+    animation-delay: calc(var(--block-index) * 160ms);
+  }
+}
+
+/* Each pillar lifts in turn, then settles before the next wave. */
+@keyframes solid-foundation-wave {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(calc(-6px - var(--block-index) * 1px));
+  }
 }
 
 .art-baseline {

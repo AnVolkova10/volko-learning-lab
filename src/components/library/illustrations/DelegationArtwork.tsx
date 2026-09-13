@@ -15,6 +15,24 @@ export function DelegationArtwork() {
           className="delegation-route"
           d="M216 119 C216 159 94 121 94 179 M229 119 C229 148 337 128 337 178 M220 126 V185 M94 235 C94 279 196 248 211 288 M337 232 C337 280 243 249 229 288 M220 229 V285"
         />
+        {/* Pulses follow the same routes, passing behind each tool card. */}
+        <g className="delegation-signals">
+          <path
+            className="delegation-signal"
+            pathLength="100"
+            d="M216 119 C216 159 94 121 94 179 L94 235 C94 279 196 248 211 288"
+          />
+          <path
+            className="delegation-signal"
+            pathLength="100"
+            d="M220 126 V285"
+          />
+          <path
+            className="delegation-signal"
+            pathLength="100"
+            d="M229 119 C229 148 337 128 337 178 L337 232 C337 280 243 249 229 288"
+          />
+        </g>
         <g transform="rotate(-7 220 78)">
           <rect
             className="delegation-shadow"
@@ -101,6 +119,7 @@ export function DelegationArtwork() {
             d="M318 186 L321 189 L326 182 M333 186 H353 M318 202 L321 205 L326 198 M333 202 H353 M318 218 L321 221 L326 214 M333 218 H347"
           />
         </g>
+        <circle className="delegation-arrival" cx="220" cy="304" r="29" />
         <circle className="delegation-review" cx="220" cy="304" r="23" />
         <path className="delegation-check" d="M209 304 L217 312 L231 295" />
         <text className="delegation-label" x="260" y="310">

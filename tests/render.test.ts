@@ -72,6 +72,17 @@ test("the reading page renders five definitions and one active question, includi
     assert.ok(delegationHtml.includes('id="project"'));
     assert.ok(delegationHtml.includes('hidden="" class="reflection-solution"'));
     assert.ok(delegationHtml.includes("GOOD AGENT DELEGATION"));
+    const asyncTopic = topics.find((topic) => topic.id === "async-javascript")!;
+    const asyncHtml = renderToStaticMarkup(
+      createElement(TopicDetail, { topic: asyncTopic }),
+    );
+    assert.equal((asyncHtml.match(/class="study-timeline"/g) || []).length, 2);
+    assert.equal((asyncHtml.match(/class="classification"/g) || []).length, 5);
+    assert.equal((asyncHtml.match(/<textarea/g) || []).length, 4);
+    assert.equal((asyncHtml.match(/class="exercise-card"/g) || []).length, 1);
+    assert.ok(asyncHtml.includes("Predict before checking"));
+    assert.ok(asyncHtml.includes("Five things to keep"));
+    assert.ok(!asyncHtml.includes("GOOD AGENT DELEGATION"));
   } finally {
     await server.close();
   }

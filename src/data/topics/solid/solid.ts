@@ -210,6 +210,47 @@ recordAnswer('solid', true, saveLocally);`,
     },
   ],
   exerciseBank: solidExercises,
+  project: {
+    title: "Untangle a workshop booking feature",
+    scenario:
+      "A workshop app has one BookingManager that calculates prices, writes receipts to disk, and builds confirmation HTML. Adding each new discount means editing its price calculation. A shared ReceiptWriter contract promises to accept every valid receipt, but one implementation rejects receipts with no company name, even though that field is optional. The confirmation view only reads the booking title, yet requires refund and delete methods. Pricing also constructs a concrete DiskReceiptWriter internally. Sketch the smallest useful changes; you do not need a class hierarchy or a new framework.",
+    fields: [
+      {
+        label: "S — RESPONSIBILITIES",
+        prompt: "Which parts change for independent reasons?",
+        suggestion:
+          "Separate pricing rules, receipt persistence, and confirmation rendering. A price-policy change, storage migration, and visual redesign are independent reasons to change. Several related calculation steps may still stay together.",
+      },
+      {
+        label: "O — EXTENSION",
+        prompt:
+          "How could a new discount fit without rewriting a stable calculation loop?",
+        suggestion:
+          "Pass a list of discount functions into the calculator. Keep the loop stable and add a new function when a discount is introduced. Define whether discounts stack and in what order; extension must preserve the intended pricing policy.",
+      },
+      {
+        label: "L — THE PROMISE TO CALLERS",
+        prompt: "Why is the company-name requirement a substitution problem?",
+        suggestion:
+          "The shared contract accepts valid receipts without company names. A replacement cannot silently strengthen that requirement. Make the implementation handle those receipts, or describe a different, narrower capability instead of advertising it as the same ReceiptWriter.",
+      },
+      {
+        label: "I — WHAT THE VIEW NEEDS",
+        prompt: "What should the confirmation view receive?",
+        suggestion:
+          "A title string, or a small object containing the title fields it actually uses. Refund and delete capabilities belong to their real callers; the view should not require them.",
+      },
+      {
+        label: "D — CONNECT THE DETAILS",
+        prompt:
+          "How do you remove disk knowledge from the business flow, and what would you test?",
+        suggestion:
+          "Let the booking flow receive a saveReceipt(receipt) function instead of constructing a disk writer. The application connects the disk implementation; tests can supply an in-memory recorder with the same behavior. Verify totals, valid receipts without company names, and that a storage error is propagated or handled according to the agreed contract. If calculation itself needs no persistence, keep saving in the coordinating flow.",
+      },
+    ],
+    closing:
+      "There is more than one sound design. Judge whether the independent changes are isolated, the contracts remain true, and the interfaces contain only what callers need. A few functions and precise props can be enough. Each principle must solve a concrete problem here.",
+  },
   recap: [
     "S — Group things that change for the same reason; separate independent responsibilities.",
     "O — Extend at useful boundaries without repeatedly rewriting stable behavior.",

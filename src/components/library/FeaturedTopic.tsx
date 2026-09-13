@@ -4,11 +4,13 @@ import { categories } from "../../data/categories";
 
 import { SolidArtwork } from "./illustrations/SolidArtwork";
 import { DelegationArtwork } from "./illustrations/DelegationArtwork";
+import { AsyncArtwork } from "./illustrations/AsyncArtwork";
 
 // Each topic must choose a bespoke illustration; there is no generic fallback.
 const illustrations = {
   "solid-foundations": SolidArtwork,
   "delegation-map": DelegationArtwork,
+  "async-clock": AsyncArtwork,
 };
 
 export function FeaturedTopic({

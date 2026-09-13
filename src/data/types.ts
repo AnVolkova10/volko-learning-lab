@@ -32,7 +32,7 @@ export type Exercise = {
 
 export type Topic = {
   id: string;
-  illustration: "solid-foundations" | "delegation-map";
+  illustration: "solid-foundations" | "delegation-map" | "async-clock";
   title: string;
   description: string;
   category: string;
@@ -42,9 +42,11 @@ export type Topic = {
   introduction: string;
   sections: TopicSection[];
   recap: string[];
+  recapBlocks?: StudyBlock[];
   exerciseBank: ExerciseBank;
   practiceIntroduction?: string;
-  project?: ReflectionData;
+  // Every published lesson ends with a short application activity.
+  project: ReflectionData;
   recapFormula?: string[];
   closingThought?: string;
   sources?: { title: string; url: string }[];
